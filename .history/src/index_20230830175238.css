@@ -27,8 +27,7 @@ body {
   border-radius: 5px;
 }
 .task-container label{
-  display: block;
-  padding: 10px;
+  
 }
 .add-task-form{
   padding:20px 10px 10px 10px;
