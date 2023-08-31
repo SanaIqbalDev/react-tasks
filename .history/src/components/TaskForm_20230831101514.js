@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-const TaskForm = ({onSubmit}) => {
+const TaskForm = () => {
     const [taskName, setTaskName] = useState('')
     const [detail, setDetail] = useState('')
     const [dueDate, setDueDate] = useState('')
-
+    const [showAddedTask, setShowAddedTask] = useState(false);
 
     const submitForm = (e) => {
 
@@ -22,14 +22,11 @@ const TaskForm = ({onSubmit}) => {
             alert('Enter task due date')
             return
         }
-        
-        onSubmit(taskName,detail,dueDate)
 
-        // setShowAddedTask(true)
-
-        setTaskName('')
-        setDetail('')
-        setDueDate('')
+        setShowAddedTask(true)
+        // setTaskName('')
+        // setDetail('')
+        // setDueDate('')
 
     }
     return (
@@ -52,7 +49,15 @@ const TaskForm = ({onSubmit}) => {
                 </div>
 
                 <input className='submit-btn' type='Submit' value={'Submit Task'} />
-            </form>            
+            </form>
+
+
+            {showAddedTask && 
+            <div className='task-container'>
+                <label>{taskName}</label>
+                <label>{detail}</label>
+                <label>{dueDate}</label>
+            </div>}
         </div>
     )
 }

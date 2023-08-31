@@ -11,6 +11,7 @@ function App() {
 
   const ShowItem = (name, detail, duedate) => {
 
+
     const updatedTaskInfo = {name:name, detail:detail, duedate:duedate};
 
     setTaskInfo(updatedTaskInfo);

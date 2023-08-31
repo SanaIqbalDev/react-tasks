@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
 const TaskForm = ({onSubmit}) => {
-    const [taskName, setTaskName] = useState('')
-    const [detail, setDetail] = useState('')
-    const [dueDate, setDueDate] = useState('')
+    const [taskName, setTaskName] = useState('asad')
+    const [detail, setDetail] = useState('qwerty')
+    const [dueDate, setDueDate] = useState('partition')
 
 
     const submitForm = (e) => {

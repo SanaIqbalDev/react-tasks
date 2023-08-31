@@ -6,10 +6,11 @@ import TaskItem from "./components/TaskItem";
 
 function App() {
 
-  const [taskInfo, setTaskInfo] = useState('')
+  const [taskInfo, setTaskInfo] = useState()
 
 
   const ShowItem = (name, detail, duedate) => {
+
 
     const updatedTaskInfo = {name:name, detail:detail, duedate:duedate};
 

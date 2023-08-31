@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const TaskForm = ({onSubmit}) => {
+const TaskForm = (onSubmit) => {
     const [taskName, setTaskName] = useState('')
     const [detail, setDetail] = useState('')
     const [dueDate, setDueDate] = useState('')
@@ -23,7 +23,7 @@ const TaskForm = ({onSubmit}) => {
             return
         }
         
-        onSubmit(taskName,detail,dueDate)
+        onSubmit({true})
 
         // setShowAddedTask(true)
 

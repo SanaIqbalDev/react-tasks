@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 
-const TaskForm = ({onSubmit}) => {
+const TaskForm = () => {
     const [taskName, setTaskName] = useState('')
     const [detail, setDetail] = useState('')
     const [dueDate, setDueDate] = useState('')
+    const [showAddedTask, setShowAddedTask] = useState(false);
 
+    var showTaskVal
 
     const submitForm = (e) => {
 
@@ -23,10 +25,8 @@ const TaskForm = ({onSubmit}) => {
             return
         }
         
-        onSubmit(taskName,detail,dueDate)
-
-        // setShowAddedTask(true)
-
+        showTaskVal = {taskName,detail,dueDate}
+        setShowAddedTask(true)
         setTaskName('')
         setDetail('')
         setDueDate('')
@@ -52,7 +52,15 @@ const TaskForm = ({onSubmit}) => {
                 </div>
 
                 <input className='submit-btn' type='Submit' value={'Submit Task'} />
-            </form>            
+            </form>
+
+
+            {showAddedTask && 
+            <div className='task-container'>
+                <label>showTaskVal[0]</label>
+                <label>showTaskVal[1]</label>
+                <label>showTaskVal[2]</label>
+            </div>}
         </div>
     )
 }

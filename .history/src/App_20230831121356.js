@@ -6,27 +6,26 @@ import TaskItem from "./components/TaskItem";
 
 function App() {
 
-  const [taskInfo, setTaskInfo] = useState('')
-
+  // const [showAddedTask, setShowAddedTask] = useState(false);
+  const [taskInfo, setTaskInfo] = useState([])
 
   const ShowItem = (name, detail, duedate) => {
 
-    const updatedTaskInfo = {name:name, detail:detail, duedate:duedate};
+
+    const updatedTaskInfo = [name,detail,duedate];
 
     setTaskInfo(updatedTaskInfo);
 
+    // setShowAddedTask(isTrue)
   }
-
+  // useEffect(() => {
+  //   console.log(taskInfo); // Log the updated taskInfo here
+  // }, [taskInfo]);
   return (
-
     <div className="container">
-
       <TaskForm onSubmit={ShowItem} />
-
-      {taskInfo && <TaskItem task={taskInfo} />}
-
+      {(taskInfo[0]) && <TaskItem Task={taskInfo} />}
     </div>
-
   );
 }
 

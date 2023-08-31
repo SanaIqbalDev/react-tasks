@@ -23,7 +23,7 @@ const TaskForm = ({onSubmit}) => {
             return
         }
         
-        onSubmit(taskName,detail,dueDate)
+        onSubmit({true:Boolean,taskName,detail,dueDate})
 
         // setShowAddedTask(true)
 
