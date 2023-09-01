@@ -2,6 +2,7 @@ import React from 'react'
 
 const TaskItem = (task) => {
 
+    console.log("Inside TaskItem component : ", task.task)
     const { name, detail, duedate } = task.task
 
     return (

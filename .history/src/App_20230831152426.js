@@ -1,19 +1,20 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
+import TaskItem from "./components/TaskItem";
 
 
 function App() {
 
-  const [taskList, setTaskList] = useState([])
+  const [taskInfo, setTaskInfo] = useState('')
+
 
   const ShowItem = (name, detail, duedate) => {
 
-    const updatedTaskInfo = { name, detail, duedate };
+    const updatedTaskInfo = {name, detail, duedate};
 
-      setTaskList([...taskList, updatedTaskInfo])
+    setTaskInfo(updatedTaskInfo);
 
-    console.log("Task List is : ", taskList)
   }
 
   return (
@@ -22,7 +23,7 @@ function App() {
 
       <TaskForm onSubmit={ShowItem} />
 
-     <TaskList tasks={taskList} />
+      {taskInfo && <TaskItem task={taskInfo} />}
 
     </div>
 

@@ -22,7 +22,7 @@ function App() {
 
       <TaskForm onSubmit={ShowItem} />
 
-     <TaskList tasks={taskList} />
+     <TaskList className='tasklist' tasks={taskList} />
 
     </div>
 

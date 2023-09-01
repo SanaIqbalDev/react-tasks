@@ -1,17 +1,28 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import TaskForm from "./components/TaskForm";
+import TaskItem from "./components/TaskItem";
 import TaskList from "./components/TaskList";
 
 
 function App() {
 
+  const [taskInfo, setTaskInfo] = useState('')
+
   const [taskList, setTaskList] = useState([])
+
 
   const ShowItem = (name, detail, duedate) => {
 
     const updatedTaskInfo = { name, detail, duedate };
 
-      setTaskList([...taskList, updatedTaskInfo])
+    setTaskInfo(updatedTaskInfo);
+
+    if(taskInfo){
+      setTaskInfo([...taskInfo, taskInfo])
+    }
+    
+    console.log("Current task is : " , taskInfo)
 
     console.log("Task List is : ", taskList)
   }
@@ -22,7 +33,9 @@ function App() {
 
       <TaskForm onSubmit={ShowItem} />
 
-     <TaskList tasks={taskList} />
+      {/* {taskInfo && <TaskItem task={taskInfo} />} */}
+
+      {(taskList.length > 0) && <TaskList tasks={taskList} />}
 
     </div>
 

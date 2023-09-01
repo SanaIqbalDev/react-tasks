@@ -5,13 +5,22 @@ import TaskList from "./components/TaskList";
 
 function App() {
 
-  const [taskList, setTaskList] = useState([])
+  const [taskInfo, setTaskInfo] = useState('')
+
+  const [taskList, setTaskList] = useState([{'sana', 'Sana iabal','hello'}])
+
 
   const ShowItem = (name, detail, duedate) => {
 
     const updatedTaskInfo = { name, detail, duedate };
 
-      setTaskList([...taskList, updatedTaskInfo])
+    setTaskInfo(updatedTaskInfo);
+
+    if(taskInfo){
+      setTaskList([...taskList, taskInfo])
+    }
+    
+    console.log("Current task is : " , taskInfo)
 
     console.log("Task List is : ", taskList)
   }
@@ -22,7 +31,9 @@ function App() {
 
       <TaskForm onSubmit={ShowItem} />
 
-     <TaskList tasks={taskList} />
+      {/* {taskInfo && <TaskItem task={taskInfo} />} */}
+
+      {taskInfo && (taskList.length > 0) && <TaskList tasks={taskList} />}
 
     </div>
 
