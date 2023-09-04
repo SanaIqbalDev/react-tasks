@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import TaskItem from './TaskItem'
 
-const TaskList = ({ tasks, onDelete }) => {
+const TaskList = ({ tasks }) => {
 
     const [taskList, setTaskList] = useState([])
 
@@ -16,16 +16,14 @@ const TaskList = ({ tasks, onDelete }) => {
 
     useEffect(() => {
         setTaskList([...tasks]);
-        // setSelectedCategory(selectedCat)
+
+        // setSelectedCategory('all');
 
     }, [tasks]); //whenever tasks property value changes , it will execute code inside useEffect function...
 
 
     useEffect(() => {
         setFilteredtasks([...taskList]);
-        (selectedCat === 'all') ?
-            setFilteredtasks([...taskList]) :
-            updateFilteredList()
     }, [taskList])
 
 
@@ -54,8 +52,8 @@ const TaskList = ({ tasks, onDelete }) => {
                 <label className={(selectedCat === 'household') ? 'selected-category' : 'category'} onClick={() => { CategoryClicked('household') }}>Household</label>
                 <label className={(selectedCat === 'personal') ? 'selected-category' : 'category'} onClick={() => { CategoryClicked('personal') }}>Personal</label>
             </div>
-            {console.log("Filtered tasks : ", filteredtasks)}
-            {filteredtasks && filteredtasks.map((task) => (<TaskItem task={task} onDelete={onDelete} />))}
+            {console.log("Filtered tasks : " , filteredtasks)}
+            {filteredtasks && filteredtasks.map((task) => (<TaskItem task={task} />))}
         </div>
     )
 }

@@ -6,7 +6,7 @@ import TaskList from "./components/TaskList";
 function App() {
 
   const [taskList, setTaskList] = useState([])
-  const [id, setId] = useState(1)
+  const [id, setId] = useState('1')
 
 
   const ShowItem = (name, detail, duedate, category) => {
@@ -21,8 +21,7 @@ function App() {
   }
 
   const deleteTask = (id) => {
-    console.log("Delete item with id : " , id)
-    setTaskList(taskList.filter((task) => (task.id !== id)))
+    taskList.filter((task) => {task.id !== id})
   }
 
   return (
@@ -31,7 +30,7 @@ function App() {
 
       <TaskForm onSubmit={ShowItem} />
 
-      {(taskList.length > 0) && <TaskList tasks={taskList} onDelete={deleteTask} />}
+      {(taskList.length > 0) && <TaskList tasks={taskList} />}
 
     </div>
 

@@ -19,7 +19,7 @@ body {
   border-radius: 5px;
 }
 
-.task-container {
+.task-container{
   display: block;
   margin: 30px auto 0px auto;
   padding: 3%;
@@ -27,24 +27,9 @@ body {
   background-color: rgb(198, 214, 214);
 }
 
-.task-container img {
-  width: 30px;
-  height: 30px;
-}
-
-.task-container img:hover {
-  cursor: pointer;
-}
-
-.task-container img:active {
-  scale: 1.2;
-
-}
-
-.hide-task-container {
+.hide-task-container{
   display: none;
 }
-
 .task-container label {
   display: block;
 }
@@ -52,10 +37,10 @@ body {
 .taskname {
   font-size: large;
   font-weight: 800;
+  display: inline;
 }
 
-.taskdetail,
-.taskduedate {
+.taskdetail, .taskduedate {
   margin-top: 1%;
   font-size: small;
 }
@@ -105,50 +90,42 @@ body {
   color: black;
 
 }
-
-.select {
+.select{
   margin-top: 6%;
 }
-
-.category-heading {
+.category-heading{
   display: flex;
   justify-content: center;
 
 
-}
-
-.category-heading label {
+ }
+ .category-heading label{
   height: 40px;
   flex: 1;
   text-align: center;
   line-height: 2.5em;
   font-weight: 700;
   text-transform: uppercase;
-}
+ }
 
-.category-heading label:hover {
+ .category-heading label:hover{
   background-color: orange;
   color: black;
   /* background-color: rgb(236, 205, 29); */
-}
-
-.selected-category,
-.category-heading label:active {
+ }
+ .selected-category, .category-heading label:active{
   background-color: rgb(61, 104, 104);
   color: white;
-}
-
-.task-list {
+ }
+ .task-list{
   min-height: 0px;
   overflow: auto;
   padding: 3%;
-}
-
-.task-list hr {
+ }
+ .task-list hr{
   margin: 50px auto 50px auto;
-}
-
-.partition {
+ }
+ .partition{
   height: 10px;
   border: 1px;
-}
+ }
