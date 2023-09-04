@@ -1,0 +1,17 @@
+import React from 'react'
+
+const TaskItem = ({ task }) => {
+
+
+    return (
+
+        <div className={(task.name === 'undefined') ? 'hide-task-container' : 'task-container'}>
+            {console.log("task name is : ", task.name)}
+            <label className='taskname'>{task.name}</label>
+            <label className='taskdetail'>{task.detail}</label>
+            <label className='taskduedate'>{task.duedate}</label>
+        </div>
+    )
+}
+
+export default TaskItem

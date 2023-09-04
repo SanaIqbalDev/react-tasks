@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  max-width: 500px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid rgb(61, 104, 104);
+  padding: 3%;
+  border-radius: 5px;
+}
+
+.task-container{
+  margin: 30px auto 0px auto;
+  padding: 3%;
+  border-radius: 5px;
+  background-color: rgb(198, 214, 214);
+  list-style: none;
+  padding-left: 0px;
+}
+
+.task-container label {
+  display: block;
+}
+
+.taskname {
+  font-size: large;
+  font-weight: 800;
+}
+
+.taskdetail, .taskduedate {
+  margin-top: 1%;
+  font-size: small;
+}
+
+.taskduedate {
+  color: rgb(206, 3, 3);
+  font-weight: 900;
+}
+
+.add-task-form {
+  padding: 20px 10px 10px 10px;
+}
+
+.input-section {
+  display: block;
+  width: 100%;
+  margin-bottom: 4%;
+}
+
+.input-section label {
+  font-weight: 1000;
+}
+
+.input-text {
+  box-sizing: border-box;
+  padding: 2%;
+  font-size: medium;
+  width: 100%;
+  margin-top: 1.5%;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 15%;
+  height: 50px;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: large;
+  color: white;
+  background-color: rgb(61, 104, 104);
+  border: 0px solid transparent;
+  border-radius: 5px;
+}
+
+.submit-btn:active {
+  background-color: rgb(73, 160, 160);
+  color: black;
+
+}
+.select{
+  margin-top: 6%;
+}
+.category-heading{
+  display: flex;
+  justify-content: center;
+
+
+ }
+ .category-heading label{
+  height: 40px;
+  flex: 1;
+  text-align: center;
+  line-height: 2.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+ }
+
+ .category-heading label:hover{
+  background-color: orange;
+  color: black;
+  /* background-color: rgb(236, 205, 29); */
+ }
+ .selected-category, .category-heading label:active{
+  background-color: rgb(61, 104, 104);
+  color: white;
+ }
+ .task-list{
+  min-height: 0px;
+  overflow: auto;
+  padding: 3%;
+ }
+ .task-list hr{
+  margin: 50px auto 50px auto;
+ }
+ .partition{
+  height: 10px;
+  border: 1px;
+ }
