@@ -34,7 +34,7 @@ function App() {
       return task.id === taskId ? { ...task, isComplete: isComplete } : task;
     });
     
-    setTaskList(newTaskList);
+    setTaskList(...taskList, newTaskList);
 
     // setTaskList(taskList.map(task => { task.id === taskId ? { ...task, isComplete: isComplete } : task }))
 

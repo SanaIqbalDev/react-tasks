@@ -10,13 +10,12 @@ body {
 }
 
 .container {
-  max-width: 600px;
-  max-width: 600px;
+  max-width: 500px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
   border: 1px solid rgb(61, 104, 104);
-  padding: 10px;
+  padding: 3%;
   border-radius: 5px;
 }
 
@@ -32,16 +31,16 @@ body {
 }
 
 .first {
-  width: 10%;
-  margin: auto;
+  width: 15%;
 }
 
 .second {
-  width: 65%;
+  width: 60%;
 }
 
 .third {
   width: 25%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -181,6 +180,6 @@ body {
   padding: 5px;
   background-color: #ff9b9b;
   color: white;
-  border-radius: 5px;
-  font-size: small;
+  /* background-color: #bee6be; */
+  border-radius: 8px;
 }

@@ -45,7 +45,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .task-container img {
@@ -181,6 +181,6 @@ body {
   padding: 5px;
   background-color: #ff9b9b;
   color: white;
-  border-radius: 5px;
-  font-size: small;
+  /* background-color: #bee6be; */
+  border-radius: 8px;
 }

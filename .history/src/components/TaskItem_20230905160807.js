@@ -9,7 +9,7 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
 
             <div className='first'>
                 <Checkbox
-                checked={task.isComplete}
+                    defaultChecked
                     color="primary"
                     style={{
                         color: "#81a7a7",transform: "scale(1.5)",
@@ -25,7 +25,7 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
 
             </div>
             <div className='third'>
-                <label className='status' style={{ backgroundColor: task.isComplete ? 'green' : '#B60016' }}>{task.isComplete ? 'Completed' : 'Not Completed'}</label>
+                <label className='status' style={{ fontSize: 'small', paddingRight: '5px' }}>{task.isComplete ? 'Completed' : 'Not Completed'}</label>
                 <img src={require('../assets/ic_delete.png')} onClick={() => { onDelete(task.id) }} />
 
             </div>

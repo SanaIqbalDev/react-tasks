@@ -9,7 +9,7 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
 
             <div className='first'>
                 <Checkbox
-                checked={task.isComplete}
+                    defaultChecked
                     color="primary"
                     style={{
                         color: "#81a7a7",transform: "scale(1.5)",

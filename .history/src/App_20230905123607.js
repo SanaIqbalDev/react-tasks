@@ -28,22 +28,13 @@ function App() {
 
   const onStatusChange = (taskId, isComplete) => {
 
-    console.log("Status is : ", isComplete)
+    console.log("Status is : ", isCompleted)
 
-    const newTaskList = taskList.map(task => {
-      return task.id === taskId ? { ...task, isComplete: isComplete } : task;
-    });
-    
-    setTaskList(newTaskList);
+    setTaskList(taskList.map(task => { task.id === taskId ? { ...task, isComplete: isComplete } : task }))
 
-    // setTaskList(taskList.map(task => { task.id === taskId ? { ...task, isComplete: isComplete } : task }))
-
+    console.log("task is :", taskList)
   }
 
-  useEffect(() => {
-    console.log("task is :", taskList)
-
-  },[taskList])
 
   return (
 
