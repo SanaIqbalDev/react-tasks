@@ -61,7 +61,7 @@ const TaskForm = ({ onSubmit }) => {
                 <div className='input-section'>
                     <label>Due Date</label>
                     {console.log("min due date is :", newduedate)}
-                    <input className='input-text' type='date' min={newduedate} data-date-format="DD MM YYYY" required placeholder='Add task due date' value={dueDate} onChange={(e) => { setDueDate(e.target.value) }} />
+                    <input className='input-text' type='date' min={newduedate} required placeholder='Add task due date' value={dueDate} onChange={(e) => { setDueDate(e.target.value) }} />
                 </div>
 
                 <Select
@@ -72,7 +72,7 @@ const TaskForm = ({ onSubmit }) => {
                     autoFocus
                     required
                     value={category}
-                    onChange={setCategory}
+                    onChange={(e) => setCategory(e.target.value)}
                     placeholder={'Select category'}
                     className='select' />
 

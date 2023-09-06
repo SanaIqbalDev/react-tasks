@@ -18,8 +18,6 @@ function App() {
 
     setId(id + 1)
 
-    alert("Task added to the list successfully")
-
 
   }
 

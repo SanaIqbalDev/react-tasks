@@ -7,13 +7,13 @@ const TaskForm = ({ onSubmit }) => {
     const [dueDate, setDueDate] = useState('')
     const [category, setCategory] = useState('')
 
-    const dateToday = new Date().toLocaleDateString("en", { year: "numeric", month: "numeric", day: "numeric" })
+    const dateToday = new Date().toLocaleDateString("en",{year:"numeric",month:"numeric", day:"numeric"})
 
     const newDate = new Date(dateToday)
-
-    const newduedate = newDate.getFullYear() + '-' + (newDate.getMonth() + 1).toString().padStart(2, '0') + '-' + newDate.getDate().toString().padStart(2, '0');
-
-
+    
+    console.log("Formatted date is " ,newDate.getDay()+'-'+(newDate.getMonth()+1)+'-'+newDate.getFullYear())
+    
+    setDueDate(newDate.getDay()+'-'+(newDate.getMonth()+1)+'-'+newDate.getFullYear());
     const options = [
         { value: 'official', label: 'Official' },
         { value: 'household', label: 'Household' },
@@ -23,6 +23,23 @@ const TaskForm = ({ onSubmit }) => {
     const submitForm = (e) => {
 
         e.preventDefault()
+
+        if (!taskName) {
+            alert('Enter task name')
+            return
+        }
+        if (!detail) {
+            alert('Enter task detail')
+            return
+        }
+        if (!dueDate) {
+            alert('Enter task due date')
+            return
+        }
+        if (!category) {
+            alert('Select suitable category for task')
+            return
+        }
 
         onSubmit(taskName, detail, dueDate, category.value)
 
@@ -60,8 +77,9 @@ const TaskForm = ({ onSubmit }) => {
 
                 <div className='input-section'>
                     <label>Due Date</label>
-                    {console.log("min due date is :", newduedate)}
-                    <input className='input-text' type='date' min={newduedate} data-date-format="DD MM YYYY" required placeholder='Add task due date' value={dueDate} onChange={(e) => { setDueDate(e.target.value) }} />
+                    {/* {console.log(Date())} */}
+                    {/* min={'2023-09-26'} */}
+                    <input className='input-text' type='date' required min={dueDate} placeholder='Add task due date' value={dueDate} onChange={(e) => { setDueDate(e.target.value) }} />
                 </div>
 
                 <Select
@@ -76,7 +94,7 @@ const TaskForm = ({ onSubmit }) => {
                     placeholder={'Select category'}
                     className='select' />
 
-                <input className='submit-btn' type='Submit' value={'Submit Task'} readOnly />
+                <input className='submit-btn' type='Submit' value={'Submit Task'} readOnly/>
             </form>
         </div>
     )
