@@ -5,22 +5,20 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
 
     return (
 
-        <div className='task-container' style={{
-            borderWidth: '3px', borderStyle: 'groove', borderColor:
-                task.priority === 1 ? 'green' :
-                    task.priority === 2 ? 'yellow' :
-                        task.priority === 3 ? 'orange' :
-                            task.priority === 4 ? 'red' : 'green'
-        }}>
+        <div className='task-container'  style={{backgroundColor:
+            task.priority===1 ? 'green':
+            task.priority===2?'#ffff99' :
+            task.priority===3? 'orange':
+            task.priority===4? 'red':'red'}}>
 
             <div className='first'>
                 <Checkbox
-                    checked={task.isComplete}
+                checked={task.isComplete}
                     color="primary"
                     style={{
-                        color: "#81a7a7", transform: "scale(1.5)",
+                        color: "#81a7a7",transform: "scale(1.5)",
                     }}
-                    onChange={(e) => onStatusChange(task.id, e.target.checked)}
+                    onChange={(e)=>onStatusChange(task.id, e.target.checked)}
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
             </div>

@@ -6,7 +6,7 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
     return (
 
         <div className='task-container' style={{
-            borderWidth: '3px', borderStyle: 'groove', borderColor:
+            borderWidth: '3px', borderStyle: 'dashed', borderColor:
                 task.priority === 1 ? 'green' :
                     task.priority === 2 ? 'yellow' :
                         task.priority === 3 ? 'orange' :
@@ -18,7 +18,7 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
                     checked={task.isComplete}
                     color="primary"
                     style={{
-                        color: "#81a7a7", transform: "scale(1.5)",
+                        color: "white", transform: "scale(1.5)",
                     }}
                     onChange={(e) => onStatusChange(task.id, e.target.checked)}
                     inputProps={{ 'aria-label': 'primary checkbox' }}

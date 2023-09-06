@@ -18,7 +18,7 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
                     checked={task.isComplete}
                     color="primary"
                     style={{
-                        color: "#81a7a7", transform: "scale(1.5)",
+                        color: "white", transform: "scale(1.5)",
                     }}
                     onChange={(e) => onStatusChange(task.id, e.target.checked)}
                     inputProps={{ 'aria-label': 'primary checkbox' }}

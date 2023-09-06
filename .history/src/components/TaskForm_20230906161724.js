@@ -6,7 +6,6 @@ const TaskForm = ({ onSubmit }) => {
     const [detail, setDetail] = useState('')
     const [dueDate, setDueDate] = useState('')
     const [category, setCategory] = useState('')
-    const [priority, setPriority] = useState('')
 
     const dateToday = new Date().toLocaleDateString("en", { year: "numeric", month: "numeric", day: "numeric" })
 
@@ -22,17 +21,17 @@ const TaskForm = ({ onSubmit }) => {
     ]
 
     const priorityOptions = [
-        { value: 4, label: 'Critical' },
-        { value: 3, label: 'High' },
-        { value: 2, label: 'Normal' },
-        { value: 1, label: 'Low' }
+        { value: 'critical', label: 'Critical' },
+        { value: 'high', label: 'High' },
+        { value: 'normal', label: 'Normal' },
+        { value: 'low', label: 'Low' }
     ]
 
     const submitForm = (e) => {
 
         e.preventDefault()
 
-        onSubmit(taskName, detail, dueDate, category.value,priority.value)
+        onSubmit(taskName, detail, dueDate, category.value)
 
         setTaskName('')
         setDetail('')
@@ -71,12 +70,12 @@ const TaskForm = ({ onSubmit }) => {
                     <input className='input-text' type='date' min={newduedate} data-date-format="DD MM YYYY" required placeholder='Add task due date' value={dueDate} onChange={(e) => { setDueDate(e.target.value) }} />
                 </div>
 
-                <div className='input-section' style={{marginTop:'10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <div style={{width:'40%'}}>
+                <div className='input-section' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <div>
                         <label>Category</label>
                         <Select
                             theme={customTheme}
-                            options={categoryOptions}
+                            options={options}
                             isClearable
                             isSearchable
                             autoFocus
@@ -86,19 +85,17 @@ const TaskForm = ({ onSubmit }) => {
                             placeholder={'Select category'}
                             className='select' />
                     </div>
-                    <div  style={{width:'40%'}}>
+                    <div>
                         <label>Priority</label>
                         <Select theme={customTheme}
-                            options={priorityOptions}
+                            options={options}
                             isClearable
                             isSearchable
                             autoFocus
-                            menuPlacement='auto'
-                            menuPosition='fixed'
                             required
-                            value={priority}
-                            onChange={setPriority}
-                            placeholder={'Select priority'}
+                            value={category}
+                            onChange={setCategory}
+                            placeholder={'Select category'}
                             className='select' />
                     </div>
                 </div>

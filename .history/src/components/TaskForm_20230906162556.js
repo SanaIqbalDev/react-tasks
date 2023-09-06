@@ -22,17 +22,17 @@ const TaskForm = ({ onSubmit }) => {
     ]
 
     const priorityOptions = [
-        { value: 4, label: 'Critical' },
-        { value: 3, label: 'High' },
-        { value: 2, label: 'Normal' },
-        { value: 1, label: 'Low' }
+        { value: 'critical', label: 'Critical' },
+        { value: 'high', label: 'High' },
+        { value: 'normal', label: 'Normal' },
+        { value: 'low', label: 'Low' }
     ]
 
     const submitForm = (e) => {
 
         e.preventDefault()
 
-        onSubmit(taskName, detail, dueDate, category.value,priority.value)
+        onSubmit(taskName, detail, dueDate, category.value)
 
         setTaskName('')
         setDetail('')

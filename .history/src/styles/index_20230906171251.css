@@ -39,6 +39,10 @@ body {
 .second {
   width: 65%;
 }
+
+.second label{
+  color: white;
+}
 .third {
   width: 25%;
   display: flex;

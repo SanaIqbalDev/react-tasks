@@ -39,6 +39,7 @@ body {
 .second {
   width: 65%;
 }
+
 .third {
   width: 25%;
   display: flex;
@@ -67,7 +68,6 @@ body {
 
 .task-container label {
   display: block;
-
 }
 
 .taskname {
