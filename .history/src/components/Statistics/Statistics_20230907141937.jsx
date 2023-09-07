@@ -2,7 +2,7 @@ import React from 'react'
 
 const Statistics = () => {
     return (
-        <div>I am not Statistics</div>
+        <div>I am Statistics</div>
     )
 }
 
