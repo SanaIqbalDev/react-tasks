@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { Checkbox } from "@mui/material";
+import deleteIcon from "../../assets/ic_delete.png"
 const TaskItem = ({ task, onDelete, onStatusChange }) => {
   return (
     <>
@@ -12,12 +13,12 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
             task.priority === 1
               ? "green"
               : task.priority === 2
-              ? "yellow"
-              : task.priority === 3
-              ? "orange"
-              : task.priority === 4
-              ? "red"
-              : "green",
+                ? "yellow"
+                : task.priority === 3
+                  ? "orange"
+                  : task.priority === 4
+                    ? "red"
+                    : "green",
         }}
       >
         <div className="first">
@@ -45,7 +46,7 @@ const TaskItem = ({ task, onDelete, onStatusChange }) => {
             {task.isComplete ? "Completed" : "Not Completed"}
           </label>
           <img
-            src={require("../assets/ic_delete.png")}
+            src={deleteIcon}
             onClick={() => {
               onDelete(task.id);
             }}

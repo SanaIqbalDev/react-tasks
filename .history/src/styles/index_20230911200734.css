@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  max-width: 600px;
+  max-width: 600px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid rgb(61, 104, 104);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.task-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: stretch;
+  margin: 30px auto 0px auto;
+  padding: 3%;
+  border-radius: 5px;
+  background-color: rgb(198, 214, 214);
+}
+
+.first {
+  width: 10%;
+  margin: auto;
+}
+
+.second {
+  width: 65%;
+}
+
+.third {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.task-container img {
+  width: 20px;
+  height: 20px;
+}
+
+.task-container img:hover {
+  cursor: pointer;
+}
+
+.task-container img:active {
+  scale: 1.2;
+}
+
+.hide-task-container {
+  display: none;
+}
+
+.task-container label {
+  display: block;
+}
+
+.taskname {
+  font-size: large;
+  font-weight: 800;
+}
+
+.taskdetail,
+.taskduedate {
+  margin-top: 1%;
+  font-size: small;
+}
+
+.taskduedate {
+  color: rgb(206, 3, 3);
+  font-weight: 900;
+}
+
+.add-task-form {
+  padding: 20px 10px 10px 10px;
+}
+
+.input-section {
+  display: block;
+  width: 100%;
+  margin-bottom: 4%;
+}
+
+.add-task-form label {
+  font-weight: 1000;
+}
+
+.input-text {
+  box-sizing: border-box;
+  padding: 2%;
+  font-size: medium;
+  width: 100%;
+  margin-top: 1.5%;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 15%;
+  height: 50px;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: large;
+  color: white;
+  background-color: rgb(61, 104, 104);
+  border: 0px solid transparent;
+  border-radius: 5px;
+}
+
+.submit-btn:active {
+  background-color: rgb(73, 160, 160);
+  color: black;
+}
+
+.select {
+  margin-top: 6%;
+}
+
+.category-heading {
+  display: flex;
+  justify-content: center;
+}
+
+.category-heading label {
+  height: 40px;
+  flex: 1;
+  text-align: center;
+  line-height: 2.5em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.category-heading label:hover {
+  background-color: orange;
+  color: black;
+  /* background-color: rgb(236, 205, 29); */
+}
+
+.selected-category,
+.category-heading label:active {
+  background-color: rgb(61, 104, 104);
+  color: white;
+}
+
+.task-list {
+  min-height: 0px;
+  overflow: auto;
+  padding: 3%;
+}
+
+.task-list hr {
+  margin: 50px auto 50px auto;
+}
+
+.partition {
+  height: 10px;
+  border: 1px;
+}
+
+.status {
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px;
+  background-color: #ff9b9b;
+  color: white;
+  border-radius: 5px;
+  font-size: small;
+}
+
+.gantt-container {
+  display: flex;
+  flex-grow: 1;
+  /* Allow the container to grow to fill available space */
+}
+
+/* Optionally, you can set specific styles for the Gantt chart itself */
+.gantt-container .gantt {
+  flex-grow: 1;
+  /* Allow the Gantt chart to grow to fill available space */
+}
