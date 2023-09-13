@@ -1,0 +1,21 @@
+.add-task-form {
+    padding: 20px 10px 10px 10px;
+}
+
+.input-section {
+    display: block;
+    width: 100%;
+    margin-bottom: 4%;
+}
+
+.add-task-form label {
+    font-weight: 1000;
+}
+
+.input-text {
+    box-sizing: border-box;
+    padding: 2%;
+    font-size: medium;
+    width: 100%;
+    margin-top: 1.5%;
+}

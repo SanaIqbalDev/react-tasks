@@ -1,0 +1,41 @@
+.stats {
+    margin: 0;
+    background-color: rgb(236, 232, 221);
+}
+
+
+.statsContainer {
+    max-width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    /* grid-template-columns: repeat(2, 50%); */
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    margin-bottom: 100px;
+    text-align: center;
+    gap: 3%;
+}
+
+.statsItem {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.completionStatsContainer {
+    max-width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid black;
+}
+
+.title {
+    display: block;
+    max-width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: x-large;
+    font-weight: 600;
+    margin-top: 10px;
+    color: black;
+}
