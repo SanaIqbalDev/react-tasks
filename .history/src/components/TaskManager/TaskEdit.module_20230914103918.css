@@ -1,0 +1,13 @@
+.editTask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow: auto;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px;
+    height: 400px;
+}

@@ -1,0 +1,35 @@
+.categoryHeading {
+    display: flex;
+    justify-content: center;
+}
+
+.categoryHeading label {
+    height: 40px;
+    flex: 1;
+    text-align: center;
+    line-height: 2.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.categoryHeading label:hover {
+    background-color: orange;
+    color: black;
+    /* background-color: rgb(236, 205, 29); */
+}
+
+.selectedCategory,
+.categoryHeading label:active {
+    background-color: rgb(61, 104, 104);
+    color: white;
+}
+
+.taskList {
+    min-height: 0px;
+    overflow: auto;
+    padding: 3%;
+}
+
+.taskList hr {
+    margin: 20px auto 20px auto;
+}
