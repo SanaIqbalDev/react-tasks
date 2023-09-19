@@ -9,7 +9,8 @@ const App = () => {
 
   return (
     <>
-      <TaskContext.Provider value={tasks}>
+      {/* <TaskContext.Provider value={[tasks, setTasks]}> */}
+      <TaskContext.Provider value={{ tasks }}>
         <Routes>
           <Route
             path="/"

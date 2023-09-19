@@ -6,14 +6,9 @@ import EditTaskForm from "./EditTaskForm";
 import { TaskContext } from "../../TaskContext";
 
 function Home({ setTasks, idNew }) {
-    const contextVal = useContext(TaskContext);
-
-    const [taskList, setTaskList] = useState(contextVal);
-
+    const [taskList, setTaskList] = useContext(TaskContext);
     const [id, setId] = useState(idNew);
-
     const [isEdit, setIsEdit] = useState(false);
-
     const [selectedTask, setSelectedtask] = useState();
 
     const AddNewTask = (name, detail, duedate, category, priority) => {
@@ -35,6 +30,9 @@ function Home({ setTasks, idNew }) {
 
         setTaskList([...taskList, updatedTaskInfo]);
         setId(id + 1);
+
+        alert("Task added to the list successfully");
+        // console.log("context task is : ", text)
     };
 
     const DeleteTask = (id) => {
@@ -117,10 +115,6 @@ function Home({ setTasks, idNew }) {
     const closeForm = () => {
         setIsEdit(false);
     };
-
-    useEffect(() => {
-        setTasks(taskList);
-    }, [taskList]);
 
     return (
         <>

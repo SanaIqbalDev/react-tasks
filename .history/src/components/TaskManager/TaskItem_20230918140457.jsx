@@ -3,7 +3,7 @@ import { Checkbox } from "@mui/material";
 import deleteIcon from "../../assets/ic_delete.png";
 import editIcon from "../../assets/ic_edit.png";
 import styles from "./TaskItem.module.css";
-const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
+const TaskItem = ({ onDelete, onEdit, onStatusChange }) => {
   return (
     <>
       <div
@@ -17,7 +17,7 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
               : task.priority === 2
                 ? "yellow"
                 : task.priority === 3
-                  ? "red"
+                  ? "orange"
                   : "green",
         }}
       >

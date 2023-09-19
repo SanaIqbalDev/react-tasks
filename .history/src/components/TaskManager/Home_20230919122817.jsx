@@ -5,7 +5,10 @@ import styles from "./Home.module.css";
 import EditTaskForm from "./EditTaskForm";
 import { TaskContext } from "../../TaskContext";
 
+
 function Home({ setTasks, idNew }) {
+
+
     const contextVal = useContext(TaskContext);
 
     const [taskList, setTaskList] = useState(contextVal);
@@ -32,6 +35,7 @@ function Home({ setTasks, idNew }) {
             priority,
             isComplete,
         };
+
 
         setTaskList([...taskList, updatedTaskInfo]);
         setId(id + 1);
@@ -119,8 +123,9 @@ function Home({ setTasks, idNew }) {
     };
 
     useEffect(() => {
-        setTasks(taskList);
+        setTasks(taskList)
     }, [taskList]);
+
 
     return (
         <>

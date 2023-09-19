@@ -7,9 +7,13 @@ import { TaskContext } from "./TaskContext";
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
+  // useEffect(() => {
+  //   setTasks(tasks);
+  // }, [tasks]);
+
   return (
     <>
-      <TaskContext.Provider value={tasks}>
+      <TaskContext.Provider value={[tasks, setTasks]}>
         <Routes>
           <Route
             path="/"

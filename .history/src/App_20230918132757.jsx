@@ -7,14 +7,19 @@ import { TaskContext } from "./TaskContext";
 const App = () => {
   const [tasks, setTasks] = useState([]);
 
+  useEffect(() => {
+    setTasks(tasks);
+  }, [tasks]);
+
   return (
     <>
-      <TaskContext.Provider value={tasks}>
+      <TaskContext.Provider value={{ tasks, setTasks }}>
         <Routes>
           <Route
             path="/"
             element={
               <Home
+                tasks={tasks}
                 setTasks={setTasks}
                 idNew={tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 0}
               />

@@ -6,14 +6,11 @@ import EditTaskForm from "./EditTaskForm";
 import { TaskContext } from "../../TaskContext";
 
 function Home({ setTasks, idNew }) {
-    const contextVal = useContext(TaskContext);
 
+    const [contextVal, setContextVal] = useContext(TaskContext);
     const [taskList, setTaskList] = useState(contextVal);
-
     const [id, setId] = useState(idNew);
-
     const [isEdit, setIsEdit] = useState(false);
-
     const [selectedTask, setSelectedtask] = useState();
 
     const AddNewTask = (name, detail, duedate, category, priority) => {
@@ -32,6 +29,7 @@ function Home({ setTasks, idNew }) {
             priority,
             isComplete,
         };
+
 
         setTaskList([...taskList, updatedTaskInfo]);
         setId(id + 1);
@@ -119,8 +117,9 @@ function Home({ setTasks, idNew }) {
     };
 
     useEffect(() => {
-        setTasks(taskList);
+        setTasks(taskList)
     }, [taskList]);
+
 
     return (
         <>

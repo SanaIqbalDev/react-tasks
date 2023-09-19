@@ -5,18 +5,14 @@ import styles from "./Home.module.css";
 import EditTaskForm from "./EditTaskForm";
 import { TaskContext } from "../../TaskContext";
 
-function Home({ setTasks, idNew }) {
-    const contextVal = useContext(TaskContext);
-
-    const [taskList, setTaskList] = useState(contextVal);
-
+function Home({ tasks, setTasks, idNew }) {
+    const [taskList, setTaskList] = useState(tasks);
+    // const [taskList, setTaskList] = useContext(TaskContext);
     const [id, setId] = useState(idNew);
-
     const [isEdit, setIsEdit] = useState(false);
-
     const [selectedTask, setSelectedtask] = useState();
 
-    const AddNewTask = (name, detail, duedate, category, priority) => {
+    const ShowItem = (name, detail, duedate, category, priority) => {
         const isComplete = false;
         const startDate = getDateToday();
         const completionDate = undefined;
@@ -35,14 +31,16 @@ function Home({ setTasks, idNew }) {
 
         setTaskList([...taskList, updatedTaskInfo]);
         setId(id + 1);
+
+        alert("Task added to the list successfully");
     };
 
-    const DeleteTask = (id) => {
+    const deleteTask = (id) => {
         console.log("Delete item with id : ", id);
         setTaskList(taskList.filter((task) => task.id !== id));
     };
 
-    const TaskStatusChange = (taskId, isComplete) => {
+    const onStatusChange = (taskId, isComplete) => {
         console.log("Status is : ", isComplete);
 
         const completionDate = isComplete ? getDateToday() : undefined;
@@ -56,7 +54,7 @@ function Home({ setTasks, idNew }) {
         setTaskList(newTaskList);
     };
 
-    const EditTask = (id) => {
+    const editTask = (id) => {
         setSelectedtask(taskList.filter((task) => task.id === id)[0]);
         setIsEdit(true);
     };
@@ -117,22 +115,22 @@ function Home({ setTasks, idNew }) {
     const closeForm = () => {
         setIsEdit(false);
     };
-
     useEffect(() => {
+        console.log("task is :", taskList);
         setTasks(taskList);
     }, [taskList]);
 
     return (
         <>
             <div className={styles.container}>
-                <AddTaskForm onSubmit={AddNewTask} />
+                <AddTaskForm onSubmit={ShowItem} />
 
                 {taskList.length > 0 && (
                     <TaskList
                         tasks={taskList}
-                        onDelete={DeleteTask}
-                        onEdit={EditTask}
-                        onStatusChange={TaskStatusChange}
+                        onDelete={deleteTask}
+                        onEdit={editTask}
+                        onStatusChange={onStatusChange}
                     />
                 )}
 
