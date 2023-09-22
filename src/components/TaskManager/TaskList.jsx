@@ -1,21 +1,18 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import styles from "./TaskList.module.css";
+import { TaskContext } from "../../TaskContext";
 
-const TaskList = ({ tasks, onDelete, onEdit, onStatusChange }) => {
-  const [taskList, setTaskList] = useState([]);
+const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
+  const taskList = useContext(TaskContext);
 
-  const [filteredtasks, setFilteredtasks] = useState([]);
+  const [filteredtasks, setFilteredtasks] = useState(taskList);
 
   const [selectedCat, setSelectedCategory] = useState("all");
 
   const CategoryClicked = (value) => {
     setSelectedCategory(value);
   };
-
-  useEffect(() => {
-    setTaskList([...tasks]);
-  }, [tasks]);
 
   useEffect(() => {
     setFilteredtasks([...taskList]);

@@ -1,16 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TaskList from "./TaskList";
 import AddTaskForm from "./AddTaskForm";
 import styles from "./Home.module.css";
 import EditTaskForm from "./EditTaskForm";
+import { TaskContext } from "../../TaskContext";
 
-function Home({ tasks, setTasks, idNew }) {
-    const [taskList, setTaskList] = useState(tasks);
+function Home({ setTasks, idNew }) {
+    const contextVal = useContext(TaskContext);
+
+    const [taskList, setTaskList] = useState(contextVal);
+
     const [id, setId] = useState(idNew);
+
     const [isEdit, setIsEdit] = useState(false);
+
     const [selectedTask, setSelectedtask] = useState();
 
-    const ShowItem = (name, detail, duedate, category, priority) => {
+    const AddNewTask = (name, detail, duedate, category, priority) => {
         const isComplete = false;
         const startDate = getDateToday();
         const completionDate = undefined;
@@ -29,16 +35,14 @@ function Home({ tasks, setTasks, idNew }) {
 
         setTaskList([...taskList, updatedTaskInfo]);
         setId(id + 1);
-
-        alert("Task added to the list successfully");
     };
 
-    const deleteTask = (id) => {
+    const DeleteTask = (id) => {
         console.log("Delete item with id : ", id);
         setTaskList(taskList.filter((task) => task.id !== id));
     };
 
-    const onStatusChange = (taskId, isComplete) => {
+    const TaskStatusChange = (taskId, isComplete) => {
         console.log("Status is : ", isComplete);
 
         const completionDate = isComplete ? getDateToday() : undefined;
@@ -52,7 +56,7 @@ function Home({ tasks, setTasks, idNew }) {
         setTaskList(newTaskList);
     };
 
-    const editTask = (id) => {
+    const EditTask = (id) => {
         setSelectedtask(taskList.filter((task) => task.id === id)[0]);
         setIsEdit(true);
     };
@@ -66,7 +70,7 @@ function Home({ tasks, setTasks, idNew }) {
         taskId
     ) => {
         console.log(
-            "task deails are :",
+            "task details are :",
             taskName,
             taskDetail,
             taskDueDate,
@@ -113,22 +117,22 @@ function Home({ tasks, setTasks, idNew }) {
     const closeForm = () => {
         setIsEdit(false);
     };
+
     useEffect(() => {
-        console.log("task is :", taskList);
         setTasks(taskList);
     }, [taskList]);
 
     return (
         <>
             <div className={styles.container}>
-                <AddTaskForm onSubmit={ShowItem} />
+                <AddTaskForm onSubmit={AddNewTask} />
 
                 {taskList.length > 0 && (
                     <TaskList
                         tasks={taskList}
-                        onDelete={deleteTask}
-                        onEdit={editTask}
-                        onStatusChange={onStatusChange}
+                        onDelete={DeleteTask}
+                        onEdit={EditTask}
+                        onStatusChange={TaskStatusChange}
                     />
                 )}
 

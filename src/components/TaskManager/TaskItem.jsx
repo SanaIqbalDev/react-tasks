@@ -17,7 +17,7 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
               : task.priority === 2
                 ? "yellow"
                 : task.priority === 3
-                  ? "orange"
+                  ? "red"
                   : "green",
         }}
       >
