@@ -17,24 +17,12 @@ const PriorityInsights = ({ values }) => {
             },
         ],
     };
-    const options = {
-        aspectRation: 1,
-    };
-    const plugins = [
-        {
-            beforeDraw: function (chart) {
-                var width = chart.width,
-                    height = chart.height,
-                    ctx = chart.ctx;
-                ctx.restore();
-            },
-        },
-    ];
+
     return (
         <>
             <label>Tasks based on priority</label>
 
-            <Pie data={data} options={options} plugins={plugins} />
+            <Pie data={data} />
         </>
     );
 };

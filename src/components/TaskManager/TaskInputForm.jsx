@@ -1,4 +1,4 @@
-import React, { useEffect, useId } from "react";
+import React from "react";
 import styles from "./TaskInputForm.module.css";
 import Select from "react-select";
 import { useState } from "react";
@@ -6,7 +6,7 @@ import { useState } from "react";
 const TaskInputForm = ({ task, onSubmit }) => {
 
 
-    const { name, detail, duedate, category, priority } = task ? task : {};
+    const { name, detail, dueDate, category, priority } = task ? task : {};
 
     const categoryOptions = [
         { value: "official", label: "Official" },
@@ -22,7 +22,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
 
     const [taskName, setTaskName] = useState(name);
     const [taskDetail, setDetail] = useState(detail);
-    const [taskDueDate, setDueDate] = useState(duedate);
+    const [taskDueDate, setDueDate] = useState(dueDate);
     const [taskCategory, setCategory] = useState(
         category == categoryOptions[0].value
             ? categoryOptions[0]
@@ -32,7 +32,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
                     ? categoryOptions[2]
                     : undefined
     );
-    const [taskPriority, setPriority] = useState(
+    const [taskPriority, setTaskPriority] = useState(
         priority == priorityOptions[0].value
             ? priorityOptions[0]
             : priority == priorityOptions[1].value
@@ -58,7 +58,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
         setDetail("");
         setDueDate("");
         setCategory("");
-        setPriority("");
+        setTaskPriority("");
     };
 
     const dateToday = new Date().toLocaleDateString("en", {
@@ -167,7 +167,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
                             autoFocus
                             required
                             value={taskPriority}
-                            onChange={setPriority}
+                            onChange={setTaskPriority}
                             placeholder={"Select priority"}
                             className={styles.select}
                         />

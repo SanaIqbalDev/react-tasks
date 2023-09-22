@@ -1,6 +1,5 @@
 import { Gantt, ViewMode } from "gantt-task-react";
 import "gantt-task-react/dist/index.css";
-
 import React from "react";
 import { useState } from "react";
 import moment from "moment/moment";
@@ -11,13 +10,13 @@ const GanttTaskStatus = () => {
     const progressCol = "green";
     const progressSelColor = "green";
 
-    const getProgressPercent = (start_date, due_date, completion_date) => {
-        console.log(start_date, "\n", due_date, "\n", completion_date);
-        if (completion_date >= start_date && completion_date <= due_date) {
-            const totalNumberOfDays = moment(due_date).diff(start_date, "days");
+    const getProgressPercent = (startDate, dueDate, completionDate) => {
+        console.log(startDate, "\n", dueDate, "\n", completionDate);
+        if (completionDate >= startDate && completionDate <= dueDate) {
+            const totalNumberOfDays = moment(dueDate).diff(startDate, "days");
 
-            let taskCompletedInDays = moment(completion_date).diff(
-                start_date,
+            let taskCompletedInDays = moment(completionDate).diff(
+                startDate,
                 "days"
             );
 
@@ -34,7 +33,6 @@ const GanttTaskStatus = () => {
         {
             start: new Date(2023, 8, 1),
             end: new Date(2023, 8, 10),
-            completion_date: new Date(2023, 8, 5),
             name: "Task 1",
             id: "0",
             type: "task",

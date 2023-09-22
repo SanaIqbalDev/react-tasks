@@ -12,12 +12,12 @@ const CompletedTasks = ({ values }) => {
         return accumulator + currentValue;
     }, 0);
 
-    const Completionpercent = Math.round((testValues[0] / allTasks) * 100);
+    const completionPercent = Math.round((testValues[0] / allTasks) * 100);
 
-    const labela = `Completed tasks ${Completionpercent}% `;
-    const labelb = `Pending tasks ${100 - Completionpercent}%`;
+    const labelA = `Completed tasks ${completionPercent}% `;
+    const labelB = `Pending tasks ${100 - completionPercent}%`;
     const data = {
-        labels: [labela, labelb],
+        labels: [labelA, labelB],
         datasets: [
             {
                 label: "# of Tasks",
@@ -40,7 +40,7 @@ const CompletedTasks = ({ values }) => {
                 ctx.font = fontSize + "em sans-serif";
                 ctx.textBaseline = "top";
 
-                var text = Completionpercent + "%",
+                var text = completionPercent + "%",
                     textX = Math.round((width - ctx.measureText(text).width) / 2),
                     textY = height / 2;
                 ctx.fillText(text, textX, textY);
@@ -49,14 +49,10 @@ const CompletedTasks = ({ values }) => {
         },
     ];
 
-    const options = {
-        aspectRation: 1,
-    };
-
     return (
         <>
             <label>Total number of tasks: {allTasks}</label>
-            <Doughnut data={data} plugins={plugins} options={options} />
+            <Doughnut data={data} plugins={plugins} />
         </>
     );
 };

@@ -7,21 +7,23 @@ import PriorityInsights from "./PriorityInsights.jsx";
 import GanttTaskStatus from "./GanttTaskStatus.jsx";
 
 const Statistics = ({ tasks }) => {
-    const TaskCompeletionStats = () => {
-        const CompletedTasks = tasks.filter((task) =>
+
+
+    const taskCompeletionStats = () => {
+        const completedTasks = tasks.filter((task) =>
             task.isComplete ? task : undefined
         );
-        const IncompleteTasks = tasks.filter((task) =>
+        const incompleteTasks = tasks.filter((task) =>
             task.isComplete ? undefined : task
         );
 
-        console.log("Incomplete tasks are : ", IncompleteTasks);
-        console.log("Completed tasks are : ", CompletedTasks);
+        console.log("Incomplete tasks are : ", incompleteTasks);
+        console.log("Completed tasks are : ", completedTasks);
 
-        return [CompletedTasks.length, IncompleteTasks.length];
+        return [completedTasks.length, incompleteTasks.length];
     };
 
-    const TaskPriorityStats = () => {
+    const taskPriorityStats = () => {
         const highPriority = tasks.filter((task) =>
             task.priority === 3 ? task : undefined
         );
@@ -37,7 +39,7 @@ const Statistics = ({ tasks }) => {
     };
 
     useEffect(() => {
-        TaskCompeletionStats();
+        taskCompeletionStats();
     }, [tasks]);
 
     return (
@@ -54,10 +56,10 @@ const Statistics = ({ tasks }) => {
 
                 <div className={styles.statsContainer}>
                     <div className={styles.statsItem}>
-                        <CompletedTasks values={TaskCompeletionStats()} />
+                        <CompletedTasks values={taskCompeletionStats()} />
                     </div>
                     <div className={styles.statsItem}>
-                        <PriorityInsights values={TaskPriorityStats()} />
+                        <PriorityInsights values={taskPriorityStats()} />
                     </div>
                     <div className={styles.statsItem}>
                         <ActivityMetrics />

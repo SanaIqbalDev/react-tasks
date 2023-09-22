@@ -1,4 +1,4 @@
-import { useContext, useEffect, useId, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TaskList from "./TaskList";
 import AddTaskForm from "./AddTaskForm";
 import styles from "./Home.module.css";
@@ -14,7 +14,7 @@ function Home({ setTasks }) {
 
     const [selectedTask, setSelectedtask] = useState();
 
-    const AddNewTask = (name, detail, duedate, category, priority) => {
+    const addNewTask = (name, detail, dueDate, category, priority) => {
         const isComplete = false;
         const startDate = getDateToday();
         const completionDate = undefined;
@@ -24,7 +24,7 @@ function Home({ setTasks }) {
             id,
             name,
             detail,
-            duedate,
+            dueDate,
             startDate,
             completionDate,
             category,
@@ -35,12 +35,12 @@ function Home({ setTasks }) {
         setTaskList([...taskList, updatedTaskInfo]);
     };
 
-    const DeleteTask = (id) => {
+    const deleteTask = (id) => {
         console.log("Delete item with id : ", id);
         setTaskList(taskList.filter((task) => task.id !== id));
     };
 
-    const TaskStatusChange = (taskId, isComplete) => {
+    const taskStatusChange = (taskId, isComplete) => {
         console.log("Status is : ", isComplete);
 
         const completionDate = isComplete ? getDateToday() : undefined;
@@ -54,12 +54,12 @@ function Home({ setTasks }) {
         setTaskList(newTaskList);
     };
 
-    const EditTask = (id) => {
+    const editTask = (id) => {
         setSelectedtask(taskList.filter((task) => task.id === id)[0]);
         setIsEdit(true);
     };
 
-    const UpdateItem = (
+    const updateItem = (
         taskName,
         taskDetail,
         taskDueDate,
@@ -123,20 +123,20 @@ function Home({ setTasks }) {
     return (
         <>
             <div className={styles.container}>
-                <AddTaskForm onSubmit={AddNewTask} />
+                <AddTaskForm onSubmit={addNewTask} />
 
                 {taskList.length > 0 && (
                     <TaskList
                         tasks={taskList}
-                        onDelete={DeleteTask}
-                        onEdit={EditTask}
-                        onStatusChange={TaskStatusChange}
+                        onDelete={deleteTask}
+                        onEdit={editTask}
+                        onStatusChange={taskStatusChange}
                     />
                 )}
                 {isEdit && (
                     <EditTaskForm
                         task={selectedTask}
-                        onSubmit={UpdateItem}
+                        onSubmit={updateItem}
                         closeForm={closeForm}
                     />
                 )}

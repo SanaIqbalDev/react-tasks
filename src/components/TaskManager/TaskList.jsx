@@ -11,7 +11,7 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
 
   const [sortOption, setSortOption] = useState("");
 
-  const [filteredtasks, setFilteredtasks] = useState(taskList);
+  const [filteredTasks, setFilteredtasks] = useState(taskList);
 
   const [selectedCat, setSelectedCategory] = useState("all");
 
@@ -33,13 +33,13 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
       },
     };
   };
-  const CategoryClicked = (value) => {
+  const categoryClicked = (value) => {
     setSelectedCategory(value);
   };
 
   useEffect(() => {
     if (selectedCat === "all") {
-      setFilteredtasks(SortTaskList([...taskList]));
+      setFilteredtasks(sortTaskList([...taskList]));
     } else {
       updateFilteredList();
     }
@@ -47,7 +47,7 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
 
   useEffect(() => {
     selectedCat === "all"
-      ? setFilteredtasks(SortTaskList([...taskList]))
+      ? setFilteredtasks(sortTaskList([...taskList]))
       : updateFilteredList();
   }, [selectedCat]);
 
@@ -55,21 +55,21 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
     const newTaskList = taskList.filter(
       (task) => task.category === selectedCat
     );
-    setFilteredtasks(SortTaskList([...newTaskList]));
+    setFilteredtasks(sortTaskList([...newTaskList]));
   };
 
   useEffect(() => {
-    setFilteredtasks(SortTaskList(filteredtasks));
+    setFilteredtasks(sortTaskList(filteredTasks));
   }, [sortOption]);
 
   useEffect(() => {
-    const temp = filteredtasks.map((task) => task.name);
+    const temp = filteredTasks.map((task) => task.name);
     setNameList(temp);
     console.log("temp is: ", temp);
     console.log("namelist is:", nameList);
-  }, [filteredtasks]);
+  }, [filteredTasks]);
 
-  const SortTaskList = (inputList) => {
+  const sortTaskList = (inputList) => {
     if (sortOption.value === "0") {
       return SortByDueDate(inputList);
     } else if (sortOption.value === "1") {
@@ -141,7 +141,7 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
               selectedCat === "all" ? styles.selectedCategory : styles.category
             }
             onClick={() => {
-              CategoryClicked("all");
+              categoryClicked("all");
             }}
           >
             All
@@ -153,7 +153,7 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
                 : styles.category
             }
             onClick={() => {
-              CategoryClicked("official");
+              categoryClicked("official");
             }}
           >
             Official
@@ -165,7 +165,7 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
                 : styles.category
             }
             onClick={() => {
-              CategoryClicked("household");
+              categoryClicked("household");
             }}
           >
             Household
@@ -177,15 +177,15 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
                 : styles.category
             }
             onClick={() => {
-              CategoryClicked("personal");
+              categoryClicked("personal");
             }}
           >
             Personal
           </label>
         </div>
         <TransitionGroup>
-          {filteredtasks &&
-            filteredtasks.map((task) => (
+          {filteredTasks &&
+            filteredTasks.map((task) => (
               <CSSTransition
                 key={task.id}
                 timeout={500}
