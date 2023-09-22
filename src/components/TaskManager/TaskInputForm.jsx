@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useId } from "react";
 import styles from "./TaskInputForm.module.css";
 import Select from "react-select";
 import { useState } from "react";
 
 const TaskInputForm = ({ task, onSubmit }) => {
-    console.log("Receved task is :", task);
+
 
     const { name, detail, duedate, category, priority } = task ? task : {};
 
@@ -87,10 +87,6 @@ const TaskInputForm = ({ task, onSubmit }) => {
         };
     };
 
-    // useEffect = () => {
-    //     setCategory(taskCategory)
-    //     setPriority(taskPriority)
-    // }
     return (
         <>
             <form className={styles.addTaskForm} onSubmit={submitForm}>

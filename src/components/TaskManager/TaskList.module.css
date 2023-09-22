@@ -32,3 +32,44 @@
 .taskList hr {
     margin: 50px auto 50px auto;
 }
+
+.select {
+    width: 30%;
+    height: 100%;
+}
+
+.filterHeader {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-top: 6%;
+    margin-bottom: 6%;
+    align-items: center;
+}
+
+.filterHeader input {
+    width: 60%;
+    box-sizing: border-box;
+    padding: 2%;
+    font-size: medium;
+
+}
+
+/* 
+.item-exit-active {
+    opacity: 0;
+    transition: opacity 1500ms;
+}
+
+.item-exit {
+    opacity: 1;
+}
+
+.item-enter {
+    opacity: 0;
+}
+
+.item-enter-active {
+    opacity: 1;
+    transition: opacity 1500ms;
+} */

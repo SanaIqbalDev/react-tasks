@@ -1,16 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useId, useState } from "react";
 import TaskList from "./TaskList";
 import AddTaskForm from "./AddTaskForm";
 import styles from "./Home.module.css";
 import EditTaskForm from "./EditTaskForm";
 import { TaskContext } from "../../TaskContext";
 
-function Home({ setTasks, idNew }) {
+function Home({ setTasks }) {
     const contextVal = useContext(TaskContext);
 
     const [taskList, setTaskList] = useState(contextVal);
-
-    const [id, setId] = useState(idNew);
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -20,7 +18,8 @@ function Home({ setTasks, idNew }) {
         const isComplete = false;
         const startDate = getDateToday();
         const completionDate = undefined;
-        console.log("Id is ", id);
+        var id = new Date().getTime();
+        console.log(id);
         const updatedTaskInfo = {
             id,
             name,
@@ -34,7 +33,6 @@ function Home({ setTasks, idNew }) {
         };
 
         setTaskList([...taskList, updatedTaskInfo]);
-        setId(id + 1);
     };
 
     const DeleteTask = (id) => {
@@ -135,7 +133,6 @@ function Home({ setTasks, idNew }) {
                         onStatusChange={TaskStatusChange}
                     />
                 )}
-
                 {isEdit && (
                     <EditTaskForm
                         task={selectedTask}

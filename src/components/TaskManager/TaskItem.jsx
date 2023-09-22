@@ -3,6 +3,7 @@ import { Checkbox } from "@mui/material";
 import deleteIcon from "../../assets/ic_delete.png";
 import editIcon from "../../assets/ic_edit.png";
 import styles from "./TaskItem.module.css";
+import { CSSTransition } from "react-transition-group";
 const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
   return (
     <>
