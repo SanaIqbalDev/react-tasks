@@ -5,17 +5,25 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 const CompletedTasks = ({ values }) => {
     ChartJS.register(ArcElement, Tooltip, Legend);
 
+    /**
+     * defining default values for mapping dummy data incase no tasks are added yet.
+     */
     const testValues =
-        JSON.stringify(values) == JSON.stringify([0, 0]) ? [12, 18] : values;
+        JSON.stringify(values) === JSON.stringify([0, 0]) ? [12, 18] : values;
+
+
 
     const allTasks = testValues.reduce((accumulator, currentValue) => {
         return accumulator + currentValue;
     }, 0);
 
-    const completionPercent = Math.round((testValues[0] / allTasks) * 100);
 
+    const completionPercent = Math.round((testValues[0] / allTasks) * 100);
     const labelA = `Completed tasks ${completionPercent}% `;
     const labelB = `Pending tasks ${100 - completionPercent}%`;
+
+
+    /** Dataset for mapping number of complete tasks on a doughnut graph. */
     const data = {
         labels: [labelA, labelB],
         datasets: [

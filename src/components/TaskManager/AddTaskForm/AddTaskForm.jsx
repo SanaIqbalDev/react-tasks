@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./AddTaskForm.module.css";
-import TaskInputForm from "./TaskInputForm";
+import TaskInputForm from "../TaskInputForm/TaskInputForm";
 
 const AddTaskForm = ({ onSubmit }) => {
   const task = {};

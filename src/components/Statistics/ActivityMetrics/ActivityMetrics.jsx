@@ -14,6 +14,7 @@ const ActivityMetrics = () => {
         "15th Sep",
     ];
 
+    /** Dataset for mapping task's addition and completion status on a line graph. */
     const data = {
         labels: labelData,
         datasets: [

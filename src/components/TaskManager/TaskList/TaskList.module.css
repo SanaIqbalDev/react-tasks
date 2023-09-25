@@ -15,7 +15,6 @@
 .categoryHeading label:hover {
     background-color: orange;
     color: black;
-    /* background-color: rgb(236, 205, 29); */
 }
 
 .selectedCategory,
@@ -54,22 +53,3 @@
     font-size: medium;
 
 }
-
-/* 
-.item-exit-active {
-    opacity: 0;
-    transition: opacity 1500ms;
-}
-
-.item-exit {
-    opacity: 1;
-}
-
-.item-enter {
-    opacity: 0;
-}
-
-.item-enter-active {
-    opacity: 1;
-    transition: opacity 1500ms;
-} */

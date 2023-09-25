@@ -8,13 +8,13 @@ const TaskInputForm = ({ task, onSubmit }) => {
 
     const { name, detail, dueDate, category, priority } = task ? task : {};
 
-    const categoryOptions = [
+    const CATEGORY_OPTIONS = [
         { value: "official", label: "Official" },
         { value: "household", label: "Household" },
         { value: "personal", label: "Personal" },
     ];
 
-    const priorityOptions = [
+    const PRIORITY_OPTIONS = [
         { value: 3, label: "High" },
         { value: 2, label: "Normal" },
         { value: 1, label: "Low" },
@@ -24,25 +24,25 @@ const TaskInputForm = ({ task, onSubmit }) => {
     const [taskDetail, setDetail] = useState(detail);
     const [taskDueDate, setDueDate] = useState(dueDate);
     const [taskCategory, setCategory] = useState(
-        category == categoryOptions[0].value
-            ? categoryOptions[0]
-            : category == categoryOptions[1].value
-                ? categoryOptions[1]
-                : category == categoryOptions[2].value
-                    ? categoryOptions[2]
+        category === CATEGORY_OPTIONS[0].value
+            ? CATEGORY_OPTIONS[0]
+            : category === CATEGORY_OPTIONS[1].value
+                ? CATEGORY_OPTIONS[1]
+                : category === CATEGORY_OPTIONS[2].value
+                    ? CATEGORY_OPTIONS[2]
                     : undefined
     );
     const [taskPriority, setTaskPriority] = useState(
-        priority == priorityOptions[0].value
-            ? priorityOptions[0]
-            : priority == priorityOptions[1].value
-                ? priorityOptions[1]
-                : priority == priorityOptions[2].value
-                    ? priorityOptions[2]
+        priority === PRIORITY_OPTIONS[0].value
+            ? PRIORITY_OPTIONS[0]
+            : priority === PRIORITY_OPTIONS[1].value
+                ? PRIORITY_OPTIONS[1]
+                : priority === PRIORITY_OPTIONS[2].value
+                    ? PRIORITY_OPTIONS[2]
                     : undefined
     );
 
-    const submitForm = (e) => {
+    const submitFormHandler = (e) => {
         e.preventDefault();
 
         onSubmit(
@@ -76,7 +76,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
         "-" +
         newDate.getDate().toString().padStart(2, "0");
 
-    const customTheme = (theme) => {
+    const CUSTOM_THEME = (theme) => {
         return {
             ...theme,
             colors: {
@@ -89,7 +89,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
 
     return (
         <>
-            <form className={styles.addTaskForm} onSubmit={submitForm}>
+            <form className={styles.addTaskForm} onSubmit={submitFormHandler}>
                 <div className={styles.inputSection}>
                     <label>Name</label>
                     <input
@@ -145,8 +145,8 @@ const TaskInputForm = ({ task, onSubmit }) => {
                     <div style={{ width: "40%" }}>
                         <label>Category</label>
                         <Select
-                            theme={customTheme}
-                            options={categoryOptions}
+                            theme={CUSTOM_THEME}
+                            options={CATEGORY_OPTIONS}
                             isClearable
                             isSearchable
                             autoFocus
@@ -160,8 +160,8 @@ const TaskInputForm = ({ task, onSubmit }) => {
                     <div style={{ width: "40%" }}>
                         <label>Priority</label>
                         <Select
-                            theme={customTheme}
-                            options={priorityOptions}
+                            theme={CUSTOM_THEME}
+                            options={PRIORITY_OPTIONS}
                             isClearable
                             isSearchable
                             autoFocus
@@ -176,7 +176,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
                 <input
                     className={styles.submitBtn}
                     type="Submit"
-                    value={task.name == undefined ? "Add Task" : "Update Task"}
+                    value={task.name === undefined ? "Add Task" : "Update Task"}
                     readOnly
                 />
             </form>

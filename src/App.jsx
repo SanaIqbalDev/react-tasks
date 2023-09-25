@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Home from "./components/TaskManager/Home";
-import Statistics from "./components/Statistics/Statistics";
+import Home from "./components/TaskManager/Home/Home";
+import Statistics from "./components/Statistics/Statistics/Statistics";
 import { Route, Routes } from "react-router-dom";
 import { TaskContext } from "./TaskContext";
 

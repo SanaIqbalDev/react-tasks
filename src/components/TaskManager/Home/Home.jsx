@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import TaskList from "./TaskList";
-import AddTaskForm from "./AddTaskForm";
+import TaskList from "../TaskList/TaskList";
+import AddTaskForm from "../AddTaskForm/AddTaskForm";
 import styles from "./Home.module.css";
-import EditTaskForm from "./EditTaskForm";
-import { TaskContext } from "../../TaskContext";
+import EditTaskForm from "../EditTaskForm/EditTaskForm";
+import { TaskContext } from "../../../TaskContext";
 
-function Home({ setTasks }) {
+const Home = ({ setTasks }) => {
     const contextVal = useContext(TaskContext);
 
     const [taskList, setTaskList] = useState(contextVal);
@@ -14,37 +14,31 @@ function Home({ setTasks }) {
 
     const [selectedTask, setSelectedtask] = useState();
 
-    const addNewTask = (name, detail, dueDate, category, priority) => {
-        const isComplete = false;
-        const startDate = getDateToday();
-        const completionDate = undefined;
-        var id = new Date().getTime();
-        console.log(id);
+    const onSubmitNewTask = (name, detail, dueDate, category, priority) => {
         const updatedTaskInfo = {
-            id,
+            id: new Date().getTime(),
             name,
             detail,
             dueDate,
-            startDate,
-            completionDate,
+            startDate: getDateToday(),
+            completionDate: undefined,
             category,
             priority,
-            isComplete,
+            isComplete: false,
         };
 
+        console.log("New Task Added :", updatedTaskInfo);
         setTaskList([...taskList, updatedTaskInfo]);
     };
 
-    const deleteTask = (id) => {
-        console.log("Delete item with id : ", id);
+    const onDeleteTask = (id) => {
+        console.log("Delete item : ", id);
         setTaskList(taskList.filter((task) => task.id !== id));
     };
 
-    const taskStatusChange = (taskId, isComplete) => {
-        console.log("Status is : ", isComplete);
+    const onTaskStatusChange = (taskId, isComplete) => {
 
         const completionDate = isComplete ? getDateToday() : undefined;
-
         const newTaskList = taskList.map((task) => {
             return task.id === taskId
                 ? { ...task, isComplete: isComplete, completionDate: completionDate }
@@ -54,12 +48,12 @@ function Home({ setTasks }) {
         setTaskList(newTaskList);
     };
 
-    const editTask = (id) => {
+    const onEditTask = (id) => {
         setSelectedtask(taskList.filter((task) => task.id === id)[0]);
         setIsEdit(true);
     };
 
-    const updateItem = (
+    const onUpdateTask = (
         taskName,
         taskDetail,
         taskDueDate,
@@ -67,23 +61,13 @@ function Home({ setTasks }) {
         taskPriority,
         taskId
     ) => {
-        console.log(
-            "task details are :",
-            taskName,
-            taskDetail,
-            taskDueDate,
-            taskCategory,
-            taskPriority,
-            taskId
-        );
-
         const updatesTaskList = taskList.map((task) => {
             if (task.id === taskId) {
                 return {
                     ...task,
                     name: taskName,
                     detail: taskDetail,
-                    duedate: taskDueDate,
+                    dueDate: taskDueDate,
                     category: taskCategory,
                     priority: taskPriority,
                 };
@@ -93,8 +77,9 @@ function Home({ setTasks }) {
         });
         setTaskList(updatesTaskList);
 
-        closeForm();
+        onCloseForm();
     };
+
     const getDateToday = () => {
         const dateToday = new Date().toLocaleDateString("en", {
             year: "numeric",
@@ -112,7 +97,7 @@ function Home({ setTasks }) {
             newDate.getDate().toString().padStart(2, "0")
         );
     };
-    const closeForm = () => {
+    const onCloseForm = () => {
         setIsEdit(false);
     };
 
@@ -123,26 +108,25 @@ function Home({ setTasks }) {
     return (
         <>
             <div className={styles.container}>
-                <AddTaskForm onSubmit={addNewTask} />
+                <AddTaskForm onSubmit={onSubmitNewTask} />
 
                 {taskList.length > 0 && (
                     <TaskList
-                        tasks={taskList}
-                        onDelete={deleteTask}
-                        onEdit={editTask}
-                        onStatusChange={taskStatusChange}
+                        onDelete={onDeleteTask}
+                        onEdit={onEditTask}
+                        onStatusChange={onTaskStatusChange}
                     />
                 )}
                 {isEdit && (
                     <EditTaskForm
                         task={selectedTask}
-                        onSubmit={updateItem}
-                        closeForm={closeForm}
+                        onSubmit={onUpdateTask}
+                        onClose={onCloseForm}
                     />
                 )}
             </div>
         </>
     );
-}
+};
 
 export default Home;

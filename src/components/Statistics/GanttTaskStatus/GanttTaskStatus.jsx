@@ -5,13 +5,19 @@ import { useState } from "react";
 import moment from "moment/moment";
 
 const GanttTaskStatus = () => {
-    const [view, setView] = useState(ViewMode.Day);
+    const [view] = useState(ViewMode.Day);
 
     const progressCol = "green";
     const progressSelColor = "green";
 
+    /**
+     * function to calculate the time consumed in completing the task in percentage.
+     * @param {*} startDate - Start date of the task
+     * @param {*} dueDate - Due date of the task
+     * @param {*} completionDate -Date when the task is completed
+     * @returns 
+     */
     const getProgressPercent = (startDate, dueDate, completionDate) => {
-        console.log(startDate, "\n", dueDate, "\n", completionDate);
         if (completionDate >= startDate && completionDate <= dueDate) {
             const totalNumberOfDays = moment(dueDate).diff(startDate, "days");
 
@@ -29,6 +35,9 @@ const GanttTaskStatus = () => {
         return 0;
     };
 
+    /**
+     * Tasks data to plot task's status at a particular point in time.
+     */
     const tasks = [
         {
             start: new Date(2023, 8, 1),
