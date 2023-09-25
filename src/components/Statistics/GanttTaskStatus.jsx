@@ -6,7 +6,7 @@ import { useState } from "react";
 import moment from "moment/moment";
 
 const GanttTaskStatus = () => {
-    const [view, setView] = useState(ViewMode.Day);
+    const [view] = useState(ViewMode.Day);
 
     const progressCol = "green";
     const progressSelColor = "green";

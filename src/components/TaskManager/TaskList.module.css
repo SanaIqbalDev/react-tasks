@@ -54,22 +54,3 @@
     font-size: medium;
 
 }
-
-/* 
-.item-exit-active {
-    opacity: 0;
-    transition: opacity 1500ms;
-}
-
-.item-exit {
-    opacity: 1;
-}
-
-.item-enter {
-    opacity: 0;
-}
-
-.item-enter-active {
-    opacity: 1;
-    transition: opacity 1500ms;
-} */

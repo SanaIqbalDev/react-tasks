@@ -1,4 +1,4 @@
-import React, { useEffect, useId } from "react";
+import React from "react";
 import styles from "./TaskInputForm.module.css";
 import Select from "react-select";
 import { useState } from "react";
@@ -24,20 +24,20 @@ const TaskInputForm = ({ task, onSubmit }) => {
     const [taskDetail, setDetail] = useState(detail);
     const [taskDueDate, setDueDate] = useState(duedate);
     const [taskCategory, setCategory] = useState(
-        category == categoryOptions[0].value
+        category === categoryOptions[0].value
             ? categoryOptions[0]
-            : category == categoryOptions[1].value
+            : category === categoryOptions[1].value
                 ? categoryOptions[1]
-                : category == categoryOptions[2].value
+                : category === categoryOptions[2].value
                     ? categoryOptions[2]
                     : undefined
     );
     const [taskPriority, setPriority] = useState(
-        priority == priorityOptions[0].value
+        priority === priorityOptions[0].value
             ? priorityOptions[0]
-            : priority == priorityOptions[1].value
+            : priority === priorityOptions[1].value
                 ? priorityOptions[1]
-                : priority == priorityOptions[2].value
+                : priority === priorityOptions[2].value
                     ? priorityOptions[2]
                     : undefined
     );

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useId, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TaskList from "./TaskList";
 import AddTaskForm from "./AddTaskForm";
 import styles from "./Home.module.css";
@@ -6,9 +6,9 @@ import EditTaskForm from "./EditTaskForm";
 import { TaskContext } from "../../TaskContext";
 
 function Home({ setTasks }) {
-    const contextVal = useContext(TaskContext);
+    const tasksContextData = useContext(TaskContext);
 
-    const [taskList, setTaskList] = useState(contextVal);
+    const [taskList, setTaskList] = useState(tasksContextData);
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -19,7 +19,6 @@ function Home({ setTasks }) {
         const startDate = getDateToday();
         const completionDate = undefined;
         var id = new Date().getTime();
-        console.log(id);
         const updatedTaskInfo = {
             id,
             name,
@@ -41,7 +40,6 @@ function Home({ setTasks }) {
     };
 
     const TaskStatusChange = (taskId, isComplete) => {
-        console.log("Status is : ", isComplete);
 
         const completionDate = isComplete ? getDateToday() : undefined;
 
@@ -67,15 +65,6 @@ function Home({ setTasks }) {
         taskPriority,
         taskId
     ) => {
-        console.log(
-            "task details are :",
-            taskName,
-            taskDetail,
-            taskDueDate,
-            taskCategory,
-            taskPriority,
-            taskId
-        );
 
         const updatesTaskList = taskList.map((task) => {
             if (task.id === taskId) {

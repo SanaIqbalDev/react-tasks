@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { TaskContext } from "./TaskContext";
 
 const App = () => {
-  const data = JSON.parse(localStorage.getItem("task"))
+  const data = JSON.parse(localStorage.getItem("task"));
   const [tasks, setTasks] = useState(data);
 
   useEffect(() => {
