@@ -22,7 +22,6 @@ const App = () => {
             element={
               <Home
                 setTasks={setTasks}
-                idNew={tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 0}
               />
             }
           />

@@ -5,12 +5,10 @@ import styles from "./Home.module.css";
 import EditTaskForm from "./EditTaskForm";
 import { TaskContext } from "../../TaskContext";
 
-function Home({ setTasks, idNew }) {
-    const contextVal = useContext(TaskContext);
+function Home({ setTasks }) {
+    const tasksContextData = useContext(TaskContext);
 
-    const [taskList, setTaskList] = useState(contextVal);
-
-    const [id, setId] = useState(idNew);
+    const [taskList, setTaskList] = useState(tasksContextData);
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -20,7 +18,7 @@ function Home({ setTasks, idNew }) {
         const isComplete = false;
         const startDate = getDateToday();
         const completionDate = undefined;
-        console.log("Id is ", id);
+        var id = new Date().getTime();
         const updatedTaskInfo = {
             id,
             name,
@@ -34,7 +32,6 @@ function Home({ setTasks, idNew }) {
         };
 
         setTaskList([...taskList, updatedTaskInfo]);
-        setId(id + 1);
     };
 
     const DeleteTask = (id) => {
@@ -43,7 +40,6 @@ function Home({ setTasks, idNew }) {
     };
 
     const TaskStatusChange = (taskId, isComplete) => {
-        console.log("Status is : ", isComplete);
 
         const completionDate = isComplete ? getDateToday() : undefined;
 
@@ -69,15 +65,6 @@ function Home({ setTasks, idNew }) {
         taskPriority,
         taskId
     ) => {
-        console.log(
-            "task details are :",
-            taskName,
-            taskDetail,
-            taskDueDate,
-            taskCategory,
-            taskPriority,
-            taskId
-        );
 
         const updatesTaskList = taskList.map((task) => {
             if (task.id === taskId) {
@@ -135,7 +122,6 @@ function Home({ setTasks, idNew }) {
                         onStatusChange={TaskStatusChange}
                     />
                 )}
-
                 {isEdit && (
                     <EditTaskForm
                         task={selectedTask}
