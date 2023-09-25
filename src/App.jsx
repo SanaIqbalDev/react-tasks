@@ -6,6 +6,7 @@ import { TaskContext } from "./TaskContext";
 
 const App = () => {
   const data = JSON.parse(localStorage.getItem("task"))
+  console.log("data is :", data);
   const [tasks, setTasks] = useState(data);
 
   useEffect(() => {
