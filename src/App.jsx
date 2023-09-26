@@ -5,27 +5,27 @@ import { Route, Routes } from "react-router-dom";
 import { TaskContext } from "./TaskContext";
 
 const App = () => {
-  const data = JSON.parse(localStorage.getItem("task"))
-  console.log("data is :", data);
-  const [tasks, setTasks] = useState(data);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    localStorage.setItem("task", JSON.stringify(tasks));
-  }, [tasks]);
+    mockApiCall();
+  }, []);
 
+  const mockApiCall = () => {
+    fetch("http://localhost:3031/tasks")
+      .then((data) => {
+        return data.json();
+      })
+      .then((task) => {
+        setTasks(task);
+      });
+  }
 
   return (
     <>
       <TaskContext.Provider value={tasks}>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                setTasks={setTasks}
-              />
-            }
-          />
+          <Route path="/" element={<Home />} />
           <Route path="/Statistics" element={<Statistics tasks={tasks} />} />
         </Routes>
       </TaskContext.Provider>

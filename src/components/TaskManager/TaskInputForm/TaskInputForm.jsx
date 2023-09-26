@@ -149,7 +149,6 @@ const TaskInputForm = ({ task, onSubmit }) => {
                             options={CATEGORY_OPTIONS}
                             isClearable
                             isSearchable
-                            autoFocus
                             required
                             value={taskCategory}
                             onChange={setCategory}
@@ -164,7 +163,6 @@ const TaskInputForm = ({ task, onSubmit }) => {
                             options={PRIORITY_OPTIONS}
                             isClearable
                             isSearchable
-                            autoFocus
                             required
                             value={taskPriority}
                             onChange={setTaskPriority}

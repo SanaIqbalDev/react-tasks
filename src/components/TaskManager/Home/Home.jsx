@@ -5,10 +5,10 @@ import styles from "./Home.module.css";
 import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import { TaskContext } from "../../../TaskContext";
 
-const Home = ({ setTasks }) => {
+const Home = () => {
     const contextVal = useContext(TaskContext);
 
-    const [taskList, setTaskList] = useState(contextVal);
+    const [taskList, setTaskList] = useState([]);
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -37,7 +37,6 @@ const Home = ({ setTasks }) => {
     };
 
     const onTaskStatusChange = (taskId, isComplete) => {
-
         const completionDate = isComplete ? getDateToday() : undefined;
         const newTaskList = taskList.map((task) => {
             return task.id === taskId
@@ -102,8 +101,8 @@ const Home = ({ setTasks }) => {
     };
 
     useEffect(() => {
-        setTasks(taskList);
-    }, [taskList]);
+        setTaskList(contextVal);
+    }, [contextVal]);
 
     return (
         <>
