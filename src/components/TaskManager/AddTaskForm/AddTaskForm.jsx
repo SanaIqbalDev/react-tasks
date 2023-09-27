@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "./AddTaskForm.module.css";
 import TaskInputForm from "../TaskInputForm/TaskInputForm";
+import styles from "./AddTaskForm.module.css";
 
 const AddTaskForm = ({ onSubmit }) => {
   const task = {};
   return (
     <>
-      <div className={styles.headerDiv}>
+      <div className={styles.headerContainer}>
         <h2>ADD TASK</h2>
         <button className={styles.viewStats}>
           <Link className={styles.statsLink} to={"/Statistics"}>

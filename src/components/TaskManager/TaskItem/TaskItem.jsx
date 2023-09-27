@@ -1,30 +1,23 @@
 import React from "react";
 import { Checkbox } from "@mui/material";
+import clsx from "clsx";
+import styles from "./TaskItem.module.css";
 import deleteIcon from "../../../assets/ic_delete.png";
 import editIcon from "../../../assets/ic_edit.png";
-import styles from "./TaskItem.module.css";
-const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
 
+const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
   const { id, name, detail, dueDate, priority, isComplete } = task;
 
   return (
     <>
       <div
-        className={styles.taskContainer}
-        style={{
-          borderWidth: "3px",
-          borderStyle: "groove",
-          borderColor:
-            priority === 1
-              ? "green"
-              : priority === 2
-                ? "yellow"
-                : priority === 3
-                  ? "red"
-                  : "green",
-        }}
+        className={clsx(styles.taskContainer, {
+          [styles.priority1]: priority === 1,
+          [styles.priority2]: priority === 2,
+          [styles.priority3]: priority === 3,
+        })}
       >
-        <div className={styles.first}>
+        <div className={styles.checkboxContainer}>
           <Checkbox
             checked={isComplete}
             color="primary"
@@ -36,12 +29,12 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
             inputProps={{ "aria-label": "primary checkbox" }}
           />
         </div>
-        <div className={styles.second}>
+        <div className={styles.taskDetailContainer}>
           <label className={styles.taskName}>{name}</label>
           <label className={styles.taskDetails}>{detail}</label>
           <label className={styles.taskDueDate}>{dueDate}</label>
         </div>
-        <div className={styles.third}>
+        <div className={styles.taskFunctionsContainer}>
           <label
             className={styles.status}
             style={{ backgroundColor: isComplete ? "green" : "#B60016" }}
@@ -50,14 +43,16 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
           </label>
 
           <div>
-            <img alt="edit icon"
+            <img
+              alt="edit icon"
               src={editIcon}
               onClick={() => {
                 onEdit(id);
               }}
             />
 
-            <img alt="delete icon"
+            <img
+              alt="delete icon"
               src={deleteIcon}
               onClick={() => {
                 onDelete(id);
