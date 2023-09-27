@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import styles from "./TaskInputForm.module.css";
+import clsx from "clsx";
 
 const TaskInputForm = ({ task, onSubmit }) => {
   const { name, detail, dueDate, category, priority } = task ? task : {};
@@ -130,16 +131,8 @@ const TaskInputForm = ({ task, onSubmit }) => {
           />
         </div>
 
-        <div
-          className={styles.inputContainer}
-          style={{
-            marginTop: "10%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ width: "40%" }}>
+        <div className={clsx(styles.inputContainer, styles.dropdownContainer)}>
+          <div className={styles.dropdown}>
             <label>Category</label>
             <Select
               theme={CUSTOM_THEME}
@@ -154,7 +147,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
               className={styles.select}
             />
           </div>
-          <div style={{ width: "40%" }}>
+          <div className={styles.dropdown}>
             <label>Priority</label>
             <Select
               theme={CUSTOM_THEME}

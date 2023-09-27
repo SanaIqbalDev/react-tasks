@@ -81,8 +81,17 @@
   justify-content: flex-end;
   align-items: center;
   padding: 5px;
-  background-color: #ff9b9b;
   color: white;
   border-radius: 5px;
   font-size: small;
+}
+.statusCompleted {
+  background-color: green;
+}
+.statusIncomplete {
+  background-color: #b60016;
+}
+.checkbox {
+  color: #81a7a7;
+  transform: scale(1.5);
 }

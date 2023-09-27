@@ -18,13 +18,9 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
         })}
       >
         <div className={styles.checkboxContainer}>
-          <Checkbox
+          <Checkbox className={styles.checkbox}
             checked={isComplete}
             color="primary"
-            style={{
-              color: "#81a7a7",
-              transform: "scale(1.5)",
-            }}
             onChange={(e) => onStatusChange(id, e.target.checked)}
             inputProps={{ "aria-label": "primary checkbox" }}
           />
@@ -36,8 +32,7 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
         </div>
         <div className={styles.taskFunctionsContainer}>
           <label
-            className={styles.status}
-            style={{ backgroundColor: isComplete ? "green" : "#B60016" }}
+            className={clsx(styles.status, { [styles.statusCompleted] : isComplete === true, [styles.statusIncomplete] : isComplete === false})}
           >
             {isComplete ? "Completed" : "Not Completed"}
           </label>
