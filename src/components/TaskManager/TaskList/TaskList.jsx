@@ -1,26 +1,20 @@
-import React, {
-  Fragment,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Select from "react-select";
+import clsx from "clsx";
+import { TaskContext } from "../../../TaskContext";
 import TaskItem from "../TaskItem/TaskItem";
 import styles from "./TaskList.module.css";
-import Select from "react-select";
-import { TaskContext } from "../../../TaskContext";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import "../../../style.css";
-import clsx from "clsx";
 
 const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
   const taskList = useContext(TaskContext);
 
   const [sortOption, setSortOption] = useState("");
 
-  const [filteredTasks, setFilteredtasks] = useState(taskList);
+  const [filteredTasks, setFilteredTasks] = useState(taskList);
 
   const [selectedCat, setSelectedCategory] = useState("all");
-
 
   const [searchInput, setSearchInput] = useState([]);
 
@@ -38,6 +32,8 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
       },
     };
   };
+  let sortedList = [];
+
   const categoryClickHandler = (value) => {
     setSelectedCategory(value);
   };
@@ -51,9 +47,7 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
       return [...inputList];
     }
   };
-
   const sortByDueDate = (inputList) => {
-    var sortedList = [];
     sortedList = inputList.sort(
       (a, b) =>
         Number(new Date(a.dueDate).getTime()) -
@@ -61,10 +55,7 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
     );
     return [...sortedList];
   };
-
   const sortByPriority = (inputList) => {
-    var sortedList = [];
-
     sortedList = inputList.filter((item) => item.priority === 3);
 
     sortedList = [
@@ -83,35 +74,27 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
     const newTaskList = taskList.filter(
       (task) => task.category === selectedCat
     );
-    setFilteredtasks(sortTaskList([...newTaskList]));
+    setFilteredTasks(sortTaskList([...newTaskList]));
   };
-
 
   useEffect(() => {
     if (selectedCat === "all") {
-      setFilteredtasks(sortTaskList([...taskList]));
+      setFilteredTasks(sortTaskList([...taskList]));
     } else {
       updateFilteredList();
     }
-  }, [taskList]);
+  }, [taskList, selectedCat]);
 
   useEffect(() => {
-    selectedCat === "all"
-      ? setFilteredtasks(sortTaskList([...taskList]))
-      : updateFilteredList();
-  }, [selectedCat]);
-
-
-  useEffect(() => {
-    setFilteredtasks(sortTaskList(filteredTasks));
+    setFilteredTasks(sortTaskList(filteredTasks));
   }, [sortOption]);
-
 
   useEffect(() => {
     setSelectedCategory("all");
     const temp_ = taskList.filter((item) => item.name.includes(searchInput));
-    setFilteredtasks(temp_);
+    setFilteredTasks(temp_);
   }, [searchInput]);
+
   return (
     <>
       <div className={styles.taskList}>
@@ -183,6 +166,8 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
                 <Fragment key={task.id}>
                   <TaskItem
                     task={task}
+                    Expand
+                    Down
                     onDelete={onDelete}
                     onEdit={onEdit}
                     onStatusChange={onStatusChange}
@@ -195,5 +180,4 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
     </>
   );
 };
-
 export default TaskList;

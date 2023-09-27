@@ -1,25 +1,25 @@
 .viewStats {
-    background-color: orange;
-    border: 0;
-    padding: 10px 20px 10px 20px;
-    margin-top: auto;
-    margin-bottom: auto;
-    border-radius: 5px;
+  background-color: orange;
+  border: 0;
+  padding: 10px 20px 10px 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 5px;
 }
 
 .viewStats:hover {
-    background-color: rgb(212, 139, 3);
+  background-color: rgb(212, 139, 3);
 }
 
-.headerDiv {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .statsLink {
-    color: black;
-    font-weight: 700;
-    font-size: medium;
-    text-decoration: none;
+  color: black;
+  font-weight: 700;
+  font-size: medium;
+  text-decoration: none;
 }

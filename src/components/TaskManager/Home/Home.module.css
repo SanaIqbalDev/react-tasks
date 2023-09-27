@@ -1,10 +1,10 @@
 .container {
-    max-width: 600px;
-    max-width: 600px;
-    margin: 30px auto;
-    overflow: auto;
-    min-height: 300px;
-    border: 1px solid rgb(61, 104, 104);
-    padding: 30px;
-    border-radius: 5px;
+  max-width: 600px;
+  max-width: 600px;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 1px solid rgb(61, 104, 104);
+  padding: 30px;
+  border-radius: 5px;
 }
