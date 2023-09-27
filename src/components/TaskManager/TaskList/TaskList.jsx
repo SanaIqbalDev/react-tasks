@@ -1,35 +1,30 @@
-import React, {
-  Fragment,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import TaskItem from "../TaskItem/TaskItem";
+import React, { Fragment, createRef, useContext, useEffect, useState } from "react";
+import TaskItem from "./TaskItem";
 import styles from "./TaskList.module.css";
 import Select from "react-select";
-import { TaskContext } from "../../../TaskContext";
+import { TaskContext } from "../../TaskContext";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import "../../../style.css";
-import clsx from "clsx";
+import "../../style.css"
 
 const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
   const taskList = useContext(TaskContext);
 
   const [sortOption, setSortOption] = useState("");
 
-  const [filteredTasks, setFilteredtasks] = useState(taskList);
+  const [filteredtasks, setFilteredtasks] = useState(taskList);
 
   const [selectedCat, setSelectedCategory] = useState("all");
 
+  const [nameList, setNameList] = useState([]);
 
   const [searchInput, setSearchInput] = useState([]);
 
-  const SORT_OPTIONS = [
+  const sortOptions = [
     { value: "0", label: "Due Date" },
     { value: "1", label: "Priority" },
   ];
 
-  const CUSTOM_THEME = (theme) => {
+  const customTheme = (theme) => {
     return {
       ...theme,
       colors: {
@@ -38,58 +33,13 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
       },
     };
   };
-  const categoryClickHandler = (value) => {
+  const CategoryClicked = (value) => {
     setSelectedCategory(value);
   };
 
-  const sortTaskList = (inputList) => {
-    if (sortOption.value === "0") {
-      return sortByDueDate(inputList);
-    } else if (sortOption.value === "1") {
-      return sortByPriority(inputList);
-    } else {
-      return [...inputList];
-    }
-  };
-
-  const sortByDueDate = (inputList) => {
-    var sortedList = [];
-    sortedList = inputList.sort(
-      (a, b) =>
-        Number(new Date(a.dueDate).getTime()) -
-        Number(new Date(b.dueDate).getTime())
-    );
-    return [...sortedList];
-  };
-
-  const sortByPriority = (inputList) => {
-    var sortedList = [];
-
-    sortedList = inputList.filter((item) => item.priority === 3);
-
-    sortedList = [
-      ...sortedList,
-      inputList.filter((item) => item.priority === 2),
-    ].flat();
-
-    sortedList = [
-      ...sortedList,
-      inputList.filter((item) => item.priority === 1),
-    ].flat();
-
-    return [...sortedList];
-  };
-  const updateFilteredList = () => {
-    const newTaskList = taskList.filter(
-      (task) => task.category === selectedCat
-    );
-    setFilteredtasks(sortTaskList([...newTaskList]));
-  };
-
-
   useEffect(() => {
     if (selectedCat === "all") {
-      setFilteredtasks(sortTaskList([...taskList]));
+      setFilteredtasks(SortTaskList([...taskList]));
     } else {
       updateFilteredList();
     }
@@ -97,15 +47,66 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
 
   useEffect(() => {
     selectedCat === "all"
-      ? setFilteredtasks(sortTaskList([...taskList]))
+      ? setFilteredtasks(SortTaskList([...taskList]))
       : updateFilteredList();
   }, [selectedCat]);
 
+  const updateFilteredList = () => {
+    const newTaskList = taskList.filter(
+      (task) => task.category === selectedCat
+    );
+    setFilteredtasks(SortTaskList([...newTaskList]));
+  };
 
   useEffect(() => {
-    setFilteredtasks(sortTaskList(filteredTasks));
+    setFilteredtasks(SortTaskList(filteredtasks));
   }, [sortOption]);
 
+  useEffect(() => {
+    const temp = filteredtasks.map((task) => task.name);
+    setNameList(temp);
+    console.log("temp is: ", temp);
+    console.log("namelist is:", nameList);
+  }, [filteredtasks]);
+
+  const SortTaskList = (inputList) => {
+    if (sortOption.value === "0") {
+      return SortByDueDate(inputList);
+    } else if (sortOption.value === "1") {
+      return SortByPriority(inputList);
+    } else {
+      return [...inputList];
+    }
+  };
+
+  const SortByDueDate = (inputList) => {
+    var SortedList = [];
+    SortedList = inputList.sort(
+      (a, b) =>
+        Number(new Date(a.duedate).getTime()) -
+        Number(new Date(b.duedate).getTime())
+    );
+    console.log(SortedList);
+    return [...SortedList];
+  };
+
+  const SortByPriority = (inputList) => {
+    var SortedList = [];
+
+    SortedList = inputList.filter((item) => item.priority === 3);
+
+    SortedList = [
+      ...SortedList,
+      inputList.filter((item) => item.priority === 2),
+    ].flat();
+
+    SortedList = [
+      ...SortedList,
+      inputList.filter((item) => item.priority === 1),
+    ].flat();
+
+    return [...SortedList];
+  };
 
   useEffect(() => {
     setSelectedCategory("all");
@@ -126,8 +127,8 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
             }}
           />
           <Select
-            theme={CUSTOM_THEME}
-            options={SORT_OPTIONS}
+            theme={customTheme}
+            options={sortOptions}
             value={sortOption}
             onChange={setSortOption}
             placeholder={"Sort by:"}
@@ -136,50 +137,60 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
         </div>
         <div className={styles.categoryHeading}>
           <label
-            className={clsx(styles.category, {
-              [styles.selectedCategory]: selectedCat === "all",
-            })}
+            className={
+              selectedCat === "all" ? styles.selectedCategory : styles.category
+            }
             onClick={() => {
-              categoryClickHandler("all");
+              CategoryClicked("all");
             }}
           >
             All
           </label>
           <label
-            className={clsx(styles.category, {
-              [styles.selectedCategory]: selectedCat === "official",
-            })}
+            className={
+              selectedCat === "official"
+                ? styles.selectedCategory
+                : styles.category
+            }
             onClick={() => {
-              categoryClickHandler("official");
+              CategoryClicked("official");
             }}
           >
             Official
           </label>
           <label
-            className={clsx(styles.category, {
-              [styles.selectedCategory]: selectedCat === "household",
-            })}
+            className={
+              selectedCat === "household"
+                ? styles.selectedCategory
+                : styles.category
+            }
             onClick={() => {
-              categoryClickHandler("household");
+              CategoryClicked("household");
             }}
           >
             Household
           </label>
           <label
-            className={clsx(styles.category, {
-              [styles.selectedCategory]: selectedCat === "personal",
-            })}
+            className={
+              selectedCat === "personal"
+                ? styles.selectedCategory
+                : styles.category
+            }
             onClick={() => {
-              categoryClickHandler("personal");
+              CategoryClicked("personal");
             }}
           >
             Personal
           </label>
         </div>
         <TransitionGroup>
-          {filteredTasks &&
-            filteredTasks.map((task) => (
-              <CSSTransition key={task.id} timeout={500} classNames="item">
+          {filteredtasks &&
+            filteredtasks.map((task) => (
+              <CSSTransition
+                key={task.id}
+                timeout={500}
+                classNames="item"
+              >
                 <Fragment key={task.id}>
                   <TaskItem
                     task={task}
