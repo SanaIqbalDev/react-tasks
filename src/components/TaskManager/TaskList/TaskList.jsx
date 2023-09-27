@@ -83,13 +83,7 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
     } else {
       updateFilteredList();
     }
-  }, [taskList]);
-
-  useEffect(() => {
-    selectedCat === "all"
-      ? setFilteredTasks(sortTaskList([...taskList]))
-      : updateFilteredList();
-  }, [selectedCat]);
+  }, [taskList, selectedCat]);
 
   useEffect(() => {
     setFilteredTasks(sortTaskList(filteredTasks));
