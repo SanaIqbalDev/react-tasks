@@ -5,7 +5,7 @@ import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import { TaskContext } from "../../../TaskContext";
 import styles from "./Home.module.css";
 
-const Home = () => {
+const Home = ({ setTasks }) => {
   const tasksContextData = useContext(TaskContext);
 
   const [taskList, setTaskList] = useState(tasksContextData);
@@ -100,6 +100,10 @@ const Home = () => {
   useEffect(() => {
     setTaskList(tasksContextData);
   }, [tasksContextData]);
+
+  useEffect(() => {
+    setTasks(taskList);
+  }, [taskList]);
 
   return (
     <>

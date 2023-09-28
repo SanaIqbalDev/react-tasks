@@ -5,27 +5,18 @@ import Home from "./components/TaskManager/Home/Home";
 import Statistics from "./components/Statistics/Statistics/Statistics";
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const data = JSON.parse(localStorage.getItem("task"));
+  const [tasks, setTasks] = useState(data);
 
   useEffect(() => {
-    mockApiCall();
-  }, []);
-
-  const mockApiCall = () => {
-    fetch("http://localhost:3031/tasks")
-      .then((data) => {
-        return data.json();
-      })
-      .then((task) => {
-        setTasks(task);
-      });
-  };
+    localStorage.setItem("task", JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <>
       <TaskContext.Provider value={tasks}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home setTasks={setTasks} />} />
           <Route path="/Statistics" element={<Statistics tasks={tasks} />} />
         </Routes>
       </TaskContext.Provider>
