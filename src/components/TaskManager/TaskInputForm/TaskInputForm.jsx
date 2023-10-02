@@ -28,7 +28,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
       ? CATEGORY_OPTIONS[1]
       : category === CATEGORY_OPTIONS[2].value
       ? CATEGORY_OPTIONS[2]
-      : undefined
+      : ""
   );
   const [taskPriority, setTaskPriority] = useState(
     priority === PRIORITY_OPTIONS[0].value
@@ -37,7 +37,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
       ? PRIORITY_OPTIONS[1]
       : priority === PRIORITY_OPTIONS[2].value
       ? PRIORITY_OPTIONS[2]
-      : undefined
+      : ""
   );
 
   const submitFormHandler = (e) => {

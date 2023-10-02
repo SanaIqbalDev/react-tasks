@@ -12,6 +12,24 @@ const App = () => {
     localStorage.setItem("task", JSON.stringify(tasks));
   }, [tasks]);
 
+  useEffect(() => {
+
+    async function getRecords() {
+      const response = await fetch(`http://127.0.0.1:5050/tasks`);
+
+      if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+      const records = await response.json();
+      console.log("response is :", records);
+
+      setTasks(records);
+    }
+
+    getRecords();
+  },[])
   return (
     <>
       <TaskContext.Provider value={tasks}>
