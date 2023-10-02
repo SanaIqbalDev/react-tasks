@@ -5,36 +5,33 @@ import Home from "./components/TaskManager/Home/Home";
 import Statistics from "./components/Statistics/Statistics/Statistics";
 
 const App = () => {
-  const data = JSON.parse(localStorage.getItem("task"));
-  const [tasks, setTasks] = useState(data);
+  const [tasks, setTasks] = useState();
 
   useEffect(() => {
-    localStorage.setItem("task", JSON.stringify(tasks));
-  }, [tasks]);
-
-  useEffect(() => {
-
-    async function getRecords() {
-      const response = await fetch(`http://127.0.0.1:5050/tasks`);
-
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-      const records = await response.json();
-      console.log("response is :", records);
-
-      setTasks(records);
-    }
-
     getRecords();
   },[])
+
+  const getRecords = async() => {
+    const response = await fetch(`http://127.0.0.1:5050/tasks`);
+
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+    const records = await response.json();
+    console.log("response is :", records);
+
+    setTasks(records);
+  }
+
+
+
   return (
     <>
       <TaskContext.Provider value={tasks}>
         <Routes>
-          <Route path="/" element={<Home setTasks={setTasks} />} />
+          <Route path="/" element={<Home setTasks={setTasks} refetchTaskList={getRecords}/>} />
           <Route path="/Statistics" element={<Statistics tasks={tasks} />} />
         </Routes>
       </TaskContext.Provider>

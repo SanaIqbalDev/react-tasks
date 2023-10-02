@@ -162,12 +162,10 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
         <TransitionGroup>
           {filteredTasks &&
             filteredTasks.map((task) => (
-              <CSSTransition key={task.id} timeout={500} classNames="item">
-                <Fragment key={task.id}>
+              <CSSTransition key={task._id} timeout={500} classNames="item">
+                <Fragment key={task._id}>
                   <TaskItem
                     task={task}
-                    Expand
-                    Down
                     onDelete={onDelete}
                     onEdit={onEdit}
                     onStatusChange={onStatusChange}

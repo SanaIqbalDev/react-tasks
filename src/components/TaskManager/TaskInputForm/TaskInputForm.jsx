@@ -49,7 +49,7 @@ const TaskInputForm = ({ task, onSubmit }) => {
       taskDueDate,
       taskCategory.value,
       taskPriority.value,
-      task.id
+      task._id,
     );
 
     setTaskName("");

@@ -5,7 +5,7 @@ import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import { TaskContext } from "../../../TaskContext";
 import styles from "./Home.module.css";
 
-const Home = ({ setTasks }) => {
+const Home = ({ setTasks, refetchTaskList }) => {
   const tasksContextData = useContext(TaskContext);
 
   const [taskList, setTaskList] = useState(tasksContextData);
@@ -14,27 +14,14 @@ const Home = ({ setTasks }) => {
 
   const [selectedTask, setSelectedtask] = useState();
 
-  const submitTaskHandler = (name, detail, dueDate, category, priority) => {
-    const updatedTaskInfo = {
-      id: new Date().getTime(),
-      name,
-      detail,
-      dueDate,
-      startDate: getDateToday(),
-      completionDate: "",
-      category,
-      priority,
-      isComplete: false,
-    };
-
-    setTaskList([...taskList, updatedTaskInfo]);
-  };
-
-
-
-  const addNewTaskHandler = async(name, detail, dueDate, category, priority) => {
+  const addNewTaskHandler = async (
+    name,
+    detail,
+    dueDate,
+    category,
+    priority
+  ) => {
     const newTaskInfo = {
-      id: new Date().getTime(),
       name,
       detail,
       dueDate,
@@ -51,40 +38,56 @@ const Home = ({ setTasks }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newTaskInfo),
-    })
-      .catch(error => {
-        window.alert(error);
-        console.log("Error while adding new task");
+    }).catch((error) => {
+      window.alert(error);
+      console.log("Error while adding new task");
 
-        return;
-      })
+      return;
+    });
 
+    refetchTaskList();
   };
 
+  const deleteTaskHandler = async (id) => {
+    console.log(`deleting task with id : ${id}`);
 
+    await fetch(`http://127.0.0.1:5050/tasks/${id}`, {
+      method: "DELETE",
+    });
 
-
-  const deleteTaskHandler = (id) => {
-    setTaskList(taskList.filter((task) => task.id !== id));
+    setTaskList(taskList.filter((task) => task._id !== id));
   };
 
-  const statusChangeHandler = (taskId, isComplete) => {
+  const statusChangeHandler = async (taskId, isComplete) => {
     const completionDate = isComplete ? getDateToday() : "";
     const newTaskList = taskList.map((task) => {
-      return task.id === taskId
+      return task._id === taskId
         ? { ...task, isComplete: isComplete, completionDate: completionDate }
         : task;
     });
 
     setTaskList(newTaskList);
+
+    const editedTask = {
+      isComplete: isComplete,
+      completionDate: completionDate,
+    };
+
+    await fetch(`http://127.0.0.1:5050/tasks/${taskId}`, {
+      method: "PATCH",
+      body: JSON.stringify(editedTask),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   const editTaskHandler = (id) => {
-    setSelectedtask(taskList.filter((task) => task.id === id)[0]);
+    setSelectedtask(taskList.filter((task) => task._id === id)[0]);
     setIsEdit(true);
   };
 
-  const taskUpdateHandler = (
+  const taskUpdateHandler = async (
     taskName,
     taskDetail,
     taskDueDate,
@@ -93,7 +96,7 @@ const Home = ({ setTasks }) => {
     taskId
   ) => {
     const updatesTaskList = taskList.map((task) => {
-      if (task.id === taskId) {
+      if (task._id === taskId) {
         return {
           ...task,
           name: taskName,
@@ -107,6 +110,25 @@ const Home = ({ setTasks }) => {
       }
     });
     setTaskList(updatesTaskList);
+
+    const editedTask = {
+      name: taskName,
+      detail: taskDetail,
+      dueDate: taskDueDate,
+      category: taskCategory,
+      priority: taskPriority,
+    };
+
+    console.log("Update task with id : ", taskId);
+
+    await fetch(`http://127.0.0.1:5050/tasks/${taskId}`, {
+      method: "PATCH",
+      body: JSON.stringify(editedTask),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     closeFormHandler();
   };
 
@@ -139,31 +161,12 @@ const Home = ({ setTasks }) => {
     setTasks(taskList);
   }, [taskList]);
 
-  
-  // useEffect(() => {
-  //   async function getRecords() {
-  //     const response = await fetch(`http://127.0.0.1:5050/tasks`);
-
-  //     if (!response.ok) {
-  //       const message = `An error occurred: ${response.statusText}`;
-  //       window.alert(message);
-  //       return;
-  //     }
-
-  //     const records = await response.json();
-  //     setRecords(records);
-  //   }
-
-  //   getRecords();
-  // });
-
-
   return (
     <>
       <div className={styles.container}>
         <AddTaskForm onSubmit={addNewTaskHandler} />
 
-        {taskList.length > 0 && (
+        {taskList && (
           <TaskList
             onDelete={deleteTaskHandler}
             onEdit={editTaskHandler}

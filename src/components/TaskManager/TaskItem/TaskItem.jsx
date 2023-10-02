@@ -6,7 +6,7 @@ import deleteIcon from "../../../assets/ic_delete.png";
 import editIcon from "../../../assets/ic_edit.png";
 
 const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
-  const { id, name, detail, dueDate, priority, isComplete } = task;
+  const { _id, name, detail, dueDate, priority, isComplete } = task;
 
   return (
     <>
@@ -21,7 +21,7 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
           <Checkbox className={styles.checkbox}
             checked={isComplete}
             color="primary"
-            onChange={(e) => onStatusChange(id, e.target.checked)}
+            onChange={(e) => onStatusChange(_id, e.target.checked)}
             inputProps={{ "aria-label": "primary checkbox" }}
           />
         </div>
@@ -42,7 +42,7 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
               alt="edit icon"
               src={editIcon}
               onClick={() => {
-                onEdit(id);
+                onEdit(_id);
               }}
             />
 
@@ -50,7 +50,7 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
               alt="delete icon"
               src={deleteIcon}
               onClick={() => {
-                onDelete(id);
+                onDelete(_id);
               }}
             />
           </div>

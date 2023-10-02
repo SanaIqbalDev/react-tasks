@@ -43,6 +43,7 @@ router.post("/", async (req, res) => {
   };
   let collection = await db.collection("tasklist");
   let result = await collection.insertOne(newDocument);
+  console.log("Insertion result is :", result);
   res.send(result).status(204);
 });
 
@@ -52,25 +53,49 @@ router.post("/", async (req, res) => {
 //   const updates = {
 //     $set: {
 //       name: req.body.name,
-//       position: req.body.position,
-//       level: req.body.level,
+//       detail: req.body.detail,
+//       dueDate: req.body.dueDate,
+//       category: req.body.category,
+//       priority: req.body.priority,
 //     },
 //   };
 
-//   let collection = await db.collection("records");
+//   let collection = await db.collection("tasklist");
 //   let result = await collection.updateOne(query, updates);
 
+//   console.log("Update task result is :",result);
 //   res.send(result).status(200);
 // });
+
+
+router.patch("/:id", async(req,res) => {
+  const query = {_id: new ObjectId(req.params.id)};
+
+  const updates = {
+    $set: {
+      isComplete:req.body.isComplete,
+      completionDate: req.body.completionDate,
+    },
+  };
+
+  let collection = await db.collection("tasklist");
+  let result = await collection.updateOne(query, updates);
+  console.log("setting is complete flag result is :", result);
+  res.send(result).status(200);
+})
+
+
 
 // // This section will help you delete a record
-// router.delete("/:id", async (req, res) => {
-//   const query = { _id: new ObjectId(req.params.id) };
+router.delete("/:id", async (req, res) => {
+    const query = { _id: new ObjectId(req.params.id) };
 
-//   const collection = db.collection("records");
-//   let result = await collection.deleteOne(query);
+  console.log("query is :", query);
+  const collection = db.collection("tasklist");
+  let result = await collection.deleteOne(query);
+  console.log("Result of deletion is here : ", result);
 
-//   res.send(result).status(200);
-// });
+  res.send(result).status(200);
+});
 
 export default router;
