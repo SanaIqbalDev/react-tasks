@@ -5,7 +5,7 @@ import EditTaskForm from "../EditTaskForm/EditTaskForm";
 import { TaskContext } from "../../../TaskContext";
 import styles from "./Home.module.css";
 
-const Home = ({ setTasks, refetchTaskList }) => {
+const Home = ({ onReload }) => {
   const tasksContextData = useContext(TaskContext);
 
   const [taskList, setTaskList] = useState(tasksContextData);
@@ -13,6 +13,7 @@ const Home = ({ setTasks, refetchTaskList }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const [selectedTask, setSelectedtask] = useState();
+  let response;
 
   const addNewTaskHandler = async (
     name,
@@ -32,7 +33,7 @@ const Home = ({ setTasks, refetchTaskList }) => {
       isComplete: false,
     };
 
-    await fetch("http://127.0.0.1:5050/tasks", {
+    response = await fetch("http://127.0.0.1:5050/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,46 +41,43 @@ const Home = ({ setTasks, refetchTaskList }) => {
       body: JSON.stringify(newTaskInfo),
     }).catch((error) => {
       window.alert(error);
-      console.log("Error while adding new task");
-
       return;
     });
 
-    refetchTaskList();
+    if (response.ok) {
+      window.alert("New task added successfully.");
+    }
+
+    onReload();
   };
 
   const deleteTaskHandler = async (id) => {
-    console.log(`deleting task with id : ${id}`);
-
-    await fetch(`http://127.0.0.1:5050/tasks/${id}`, {
+    response = await fetch(`http://127.0.0.1:5050/tasks/${id}`, {
       method: "DELETE",
     });
 
-    setTaskList(taskList.filter((task) => task._id !== id));
+    if (response.ok) {
+      window.alert("Task deleted successfully.");
+    }
+
+    onReload();
   };
 
   const statusChangeHandler = async (taskId, isComplete) => {
     const completionDate = isComplete ? getDateToday() : "";
-    const newTaskList = taskList.map((task) => {
-      return task._id === taskId
-        ? { ...task, isComplete: isComplete, completionDate: completionDate }
-        : task;
-    });
-
-    setTaskList(newTaskList);
-
     const editedTask = {
       isComplete: isComplete,
       completionDate: completionDate,
     };
 
-    await fetch(`http://127.0.0.1:5050/tasks/${taskId}`, {
+    response = await fetch(`http://127.0.0.1:5050/tasks/complete/${taskId}`, {
       method: "PATCH",
       body: JSON.stringify(editedTask),
       headers: {
         "Content-Type": "application/json",
       },
     });
+    onReload();
   };
 
   const editTaskHandler = (id) => {
@@ -87,7 +85,7 @@ const Home = ({ setTasks, refetchTaskList }) => {
     setIsEdit(true);
   };
 
-  const taskUpdateHandler = async (
+  const updateTaskHandler = async (
     taskName,
     taskDetail,
     taskDueDate,
@@ -95,22 +93,6 @@ const Home = ({ setTasks, refetchTaskList }) => {
     taskPriority,
     taskId
   ) => {
-    const updatesTaskList = taskList.map((task) => {
-      if (task._id === taskId) {
-        return {
-          ...task,
-          name: taskName,
-          detail: taskDetail,
-          dueDate: taskDueDate,
-          category: taskCategory,
-          priority: taskPriority,
-        };
-      } else {
-        return task;
-      }
-    });
-    setTaskList(updatesTaskList);
-
     const editedTask = {
       name: taskName,
       detail: taskDetail,
@@ -119,9 +101,7 @@ const Home = ({ setTasks, refetchTaskList }) => {
       priority: taskPriority,
     };
 
-    console.log("Update task with id : ", taskId);
-
-    await fetch(`http://127.0.0.1:5050/tasks/${taskId}`, {
+    response = await fetch(`http://127.0.0.1:5050/tasks/${taskId}`, {
       method: "PATCH",
       body: JSON.stringify(editedTask),
       headers: {
@@ -129,7 +109,12 @@ const Home = ({ setTasks, refetchTaskList }) => {
       },
     });
 
+    onReload();
     closeFormHandler();
+
+    if (response.ok) {
+      window.alert("Task information is updated successfully.");
+    }
   };
 
   const getDateToday = () => {
@@ -157,10 +142,6 @@ const Home = ({ setTasks, refetchTaskList }) => {
     setTaskList(tasksContextData);
   }, [tasksContextData]);
 
-  useEffect(() => {
-    setTasks(taskList);
-  }, [taskList]);
-
   return (
     <>
       <div className={styles.container}>
@@ -176,7 +157,7 @@ const Home = ({ setTasks, refetchTaskList }) => {
         {isEdit && (
           <EditTaskForm
             task={selectedTask}
-            onSubmit={taskUpdateHandler}
+            onSubmit={updateTaskHandler}
             onClose={closeFormHandler}
           />
         )}

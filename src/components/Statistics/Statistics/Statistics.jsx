@@ -1,16 +1,20 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import CompletedTasks from "../CompletedTasks/CompletedTasks.jsx";
 import ActivityMetrics from "../ActivityMetrics/ActivityMetrics.jsx";
 import PriorityInsights from "../PriorityInsights/PriorityInsights.jsx";
 import GanttTaskStatus from "../GanttTaskStatus/GanttTaskStatus.jsx";
+import { TaskContext } from "../../../TaskContext.js";
 import styles from "./Statistics.module.css";
 
-const Statistics = ({ tasks }) => {
+const Statistics = () => {
   /**
    *
    * @returns count of completed and incompleted tasks as an array of numbers.
    */
+
+  let tasks = useContext(TaskContext);
+
   const taskCompeletionStats = () => {
     const completedTasks = tasks.filter((task) =>
       task.isComplete ? task : undefined

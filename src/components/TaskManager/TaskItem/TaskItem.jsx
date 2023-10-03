@@ -18,7 +18,8 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
         })}
       >
         <div className={styles.checkboxContainer}>
-          <Checkbox className={styles.checkbox}
+          <Checkbox
+            className={styles.checkbox}
             checked={isComplete}
             color="primary"
             onChange={(e) => onStatusChange(_id, e.target.checked)}
@@ -32,7 +33,10 @@ const TaskItem = ({ task, onDelete, onEdit, onStatusChange }) => {
         </div>
         <div className={styles.taskFunctionsContainer}>
           <label
-            className={clsx(styles.status, { [styles.statusCompleted] : isComplete === true, [styles.statusIncomplete] : isComplete === false})}
+            className={clsx(styles.status, {
+              [styles.statusCompleted]: isComplete === true,
+              [styles.statusIncomplete]: isComplete === false,
+            })}
           >
             {isComplete ? "Completed" : "Not Completed"}
           </label>
