@@ -109,12 +109,13 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
             }}
           />
           <Select
+            className={styles.select}
+            placeholder="Sort by"
             theme={CUSTOM_THEME}
             options={SORT_OPTIONS}
             value={sortOption}
-            onChange={setSortOption}
-            placeholder={"Sort by:"}
-            className={styles.select}
+            onChange={
+              setSortOption}
           />
         </div>
         <div className={styles.categoryHeading}>
@@ -161,7 +162,8 @@ const TaskList = ({ onDelete, onEdit, onStatusChange }) => {
         </div>
         <TransitionGroup>
           {filteredTasks &&
-            filteredTasks.map((task) => (
+            filteredTasks
+            .map((task) => (
               <CSSTransition key={task._id} timeout={500} classNames="item">
                 <Fragment key={task._id}>
                   <TaskItem
