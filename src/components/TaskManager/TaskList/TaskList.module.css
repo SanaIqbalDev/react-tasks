@@ -1,11 +1,14 @@
 .categoryHeading {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .categoryHeading label {
   height: 40px;
-  flex: 1;
+  width: 130px;
   text-align: center;
   line-height: 2.5em;
   font-weight: 700;
@@ -33,17 +36,16 @@
 }
 
 .select {
-  width: 30%;
-  height: 100%;
+  width: 36%;
 }
 
 .filterHeader {
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  margin-top: 6%;
-  margin-bottom: 6%;
   align-items: center;
+  padding: 5px;
+  flex-wrap: wrap;
 }
 
 .filterHeader input {
@@ -51,4 +53,44 @@
   box-sizing: border-box;
   padding: 2%;
   font-size: medium;
+  height: max-content;
+}
+
+@media only screen and (min-width: 601px) {
+  .filterHeader {
+    height: 39px;
+  }
+  .filterHeader input {
+    font-size: medium;
+  }
+  .select {
+    font-size: medium;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 600px) {
+  .filterHeader {
+    height: 30px;
+  }
+  .filterHeader input {
+    font-size: small;
+  }
+  .select {
+    font-size: small;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .filterHeader {
+    height: auto;
+  }
+  .filterHeader input {
+    width: 100%;
+    font-size: smaller;
+  }
+  .select {
+    margin-top: 10px;
+    width: 100%;
+    font-size: x-small;
+  }
 }
