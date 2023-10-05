@@ -1,5 +1,11 @@
+
+.body{
+  margin: 0px;
+}
 .stats {
   margin: 0;
+  padding: 55px 0px 55px 0px;
+  width: 100%;
   background-color: rgb(236, 232, 221);
 }
 
@@ -12,7 +18,7 @@
 .statsContainer {
   margin-top: 70px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   margin-bottom: 100px;
   text-align: center;
   gap: 3%;
